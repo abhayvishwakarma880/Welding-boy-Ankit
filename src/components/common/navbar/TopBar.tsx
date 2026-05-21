@@ -55,9 +55,9 @@ export default function TopBar() {
 
         {/* Scrolling marquee text */}
         <div className="overflow-hidden flex-1 mx-6">
-          <marquee behavior="scroll" direction="left" scrollamount="4" className="text-white text-xs">
-            🔥 Free delivery on orders above ₹999 &nbsp;&nbsp;&nbsp; ⚡ Custom Welding &amp; Fabrication available &nbsp;&nbsp;&nbsp; 🛠️ Steel Railing, Iron Gate, Grill, Aluminium Work &nbsp;&nbsp;&nbsp; 📞 Call us: +91 98765 43210 &nbsp;&nbsp;&nbsp; 🎉 Special discount on bulk orders! &nbsp;&nbsp;&nbsp; 🏆 Trusted by 500+ customers
-          </marquee>
+          <div className="whitespace-nowrap animate-marquee text-white text-xs inline-block">
+            🔥 Free delivery on orders above ₹999 &nbsp;&nbsp;&nbsp; ⚡ Custom Welding &amp; Fabrication available &nbsp;&nbsp;&nbsp; 🛠️ Steel Railing, Iron Gate, Grill, Aluminium Work &nbsp;&nbsp;&nbsp; 📞 Call us: +91 79059 40157 &nbsp;&nbsp;&nbsp; 🎉 Special discount on bulk orders! &nbsp;&nbsp;&nbsp; 🏆 Trusted by 500+ customers &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
         </div>
 
         {/* Buttons */}
