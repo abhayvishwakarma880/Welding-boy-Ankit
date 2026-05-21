@@ -67,7 +67,7 @@ export default function MainNavbar() {
                 unoptimized
               />
               <span className="ml-2 text-sm font-bold text-orange-600 leading-tight">
-                Shree<br />Vishwakarma
+                Shree Vishwakarma Welding work
               </span>
             </Link>
 
