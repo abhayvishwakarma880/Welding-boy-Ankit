@@ -28,8 +28,20 @@ export default function MobileDrawer({ open, onClose }: Props) {
 
   // Lock body scroll when drawer is open
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (open) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "0px";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
+
+    // document.body.style.overflow = open ? "hidden" : "";
+    // return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   return (
@@ -71,7 +83,7 @@ export default function MobileDrawer({ open, onClose }: Props) {
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto overscroll-contain">
 
           {/* Quick actions */}
           <div className="flex gap-2 px-4 py-3 border-b border-gray-100">

@@ -38,7 +38,7 @@ export default function Navbar() {
       }`}
         style={fixed ? { animation: "slideDown 0.3s ease-out" } : {}}
       >
-        <MainNavbar />
+        <MainNavbar isFixed={fixed} />
       </div>
     </div>
   );
