@@ -1,30 +1,43 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TopBar from "./TopBar";
 import MainNavbar from "./MainNavbar";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const topBarRef = useRef<HTMLDivElement>(null);
+  const [fixed, setFixed] = useState(false);
+  const [topBarHeight, setTopBarHeight] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
+    if (topBarRef.current) {
+      setTopBarHeight(topBarRef.current.offsetHeight);
+    }
+
+    const onScroll = () => {
+      if (topBarRef.current) {
+        setFixed(window.scrollY >= topBarRef.current.offsetHeight);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="w-full">
-      {/* Top Bar - hides on scroll */}
-      <div
-        className={`transition-all duration-300 overflow-hidden ${
-          scrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
-        }`}
-      >
+    <div style={{ paddingTop: fixed ? topBarHeight : 0 }}>
+      {/* TopBar - scrolls normally */}
+      <div ref={topBarRef}>
         <TopBar />
       </div>
 
-      {/* Main Navbar - always sticky */}
-      <div className="sticky top-0 z-50">
+      {/* MainNavbar - fixed at top after TopBar scrolls away */}
+      <div className={`z-50 transition-transform duration-300 ease-out ${
+        fixed
+          ? "fixed top-0 left-0 right-0 -translate-y-0 shadow-md"
+          : "relative -translate-y-0"
+      }`}
+        style={fixed ? { animation: "slideDown 0.3s ease-out" } : {}}
+      >
         <MainNavbar />
       </div>
     </div>
