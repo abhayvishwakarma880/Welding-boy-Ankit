@@ -1,10 +1,12 @@
-import HeroSection from "./home/page";
+// import HeroSection from "./home/page";
+
+import HeroSlider from "./home/page";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
 
-      <HeroSection />
+      <HeroSlider />
       {/* Hero Section */}
       {/* <section className="flex flex-col items-center justify-center h-screen text-center px-5">
         

@@ -1,0 +1,150 @@
+"use client";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { navLinks } from "./navLink";
+
+const categories = [
+  "Welding Work",
+  "Steel Railing",
+  "Iron Gate",
+  "Window Grill",
+  "Aluminium Gate",
+  "Fabrication",
+  "Cutting & Grinding",
+  "Safety Gear",
+  "Custom Orders",
+  "MS Structure",
+  "Staircase Railing",
+  "Gate Automation",
+];
+
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function MobileDrawer({ open, onClose }: Props) {
+  const [catOpen, setCatOpen] = useState(false);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        className={`fixed inset-0 bg-black/50 z-[998] transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      />
+
+      {/* Drawer */}
+      <div
+        className={`fixed top-0 left-0 h-full w-[80vw] max-w-[320px] bg-white z-[999] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${open ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        {/* Drawer Header */}
+        <div className="flex items-center justify-between px-4 py-3 bg-orange-500">
+          <span className="text-white font-bold text-base">Menu</span>
+          <button onClick={onClose} className="text-white p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Search */}
+        <div className="px-4 py-3 border-b border-gray-100">
+          <div className="flex items-center border-2 border-orange-500 rounded-md overflow-hidden">
+            <input
+              type="text"
+              placeholder="Search products, services..."
+              className="flex-1 px-3 py-2 text-sm text-gray-700 outline-none"
+            />
+            <button className="bg-orange-500 text-white px-4 py-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto">
+
+          {/* Quick actions */}
+          <div className="flex gap-2 px-4 py-3 border-b border-gray-100">
+            <button className="flex-1 flex items-center justify-center gap-2 py-2 border border-orange-500 text-orange-500 rounded-lg text-sm font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Login
+            </button>
+            <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-orange-500 text-white rounded-lg text-sm font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Create Order
+            </button>
+          </div>
+
+          {/* Nav Links */}
+          <div className="px-4 py-2 border-b border-gray-100">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Pages</p>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.path}
+                onClick={onClose}
+                className="flex items-center gap-3 py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500 border-b border-gray-50 last:border-0 transition"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Categories Accordion */}
+          <div className="px-4 py-2">
+            <button
+              onClick={() => setCatOpen(!catOpen)}
+              className="flex items-center justify-between w-full py-2.5 text-sm font-bold text-gray-700"
+            >
+              <span className="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                All Categories
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${catOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <div className={`overflow-hidden transition-all duration-300 ${catOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+              <div className="grid grid-cols-2 gap-1 pb-3">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={onClose}
+                    className="flex items-center gap-2 px-3 py-2 text-xs text-gray-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition text-left"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Drawer Footer */}
+        <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
+          <p className="text-center text-xs text-gray-400">श्री विश्वकर्मा वेल्डिंग</p>
+        </div>
+      </div>
+    </>
+  );
+}
