@@ -65,10 +65,12 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#111] py-10 px-4 relative overflow-hidden">
+    <section ref={sectionRef} className="bg-white py-10 px-4 relative overflow-hidden">
 
       {/* Subtle orange glow top-left */}
       <div className="absolute -top-20 -left-20 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Dot grid background */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(234,88,12,0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
       <div className="max-w-7xl mx-auto relative z-10">
 
@@ -77,15 +79,15 @@ export default function AboutSection() {
           className="mb-6 transition-all duration-700"
           style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)" }}
         >
-          <span className="inline-flex items-center gap-1.5 bg-orange-500/10 border border-orange-500/30 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-orange-400 uppercase mb-3">
+          <span className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-orange-600 uppercase mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" />
             About Us
           </span>
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-zinc-900 leading-tight">
             Trusted Welding &amp;{" "}
             <span className="text-orange-500">Fabrication Experts</span>
           </h2>
-          <p className="mt-2 text-sm text-zinc-400 max-w-md leading-relaxed">
+          <p className="mt-2 text-sm text-zinc-500 max-w-md leading-relaxed">
             We provide durable and precision-focused metal work solutions for homes, shops and industrial projects.
           </p>
         </div>
@@ -128,14 +130,14 @@ export default function AboutSection() {
             {features.map((f, i) => (
               <div
                 key={f.title}
-                className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 flex flex-col gap-2 hover:border-orange-500/30 hover:bg-[#1f1f1f] transition-all duration-300"
+                className="bg-white border border-zinc-200 rounded-xl p-4 flex flex-col gap-2 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-100 transition-all duration-300"
                 style={{ transitionDelay: `${0.2 + i * 0.07}s` }}
               >
-                <div className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center">
                   {f.icon}
                 </div>
-                <h3 className="text-white font-semibold text-sm">{f.title}</h3>
-                <p className="text-zinc-500 text-xs leading-relaxed">{f.desc}</p>
+                <h3 className="text-zinc-800 font-semibold text-sm">{f.title}</h3>
+                <p className="text-zinc-400 text-xs leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -144,12 +146,12 @@ export default function AboutSection() {
 
         {/* CTA Strip */}
         <div
-          className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#1a1a1a] border border-white/5 rounded-xl px-5 py-4 transition-all duration-700"
+          className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 transition-all duration-700"
           style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(12px)", transitionDelay: "0.5s" }}
         >
           <div>
-            <p className="text-zinc-400 text-xs">Need custom fabrication work?</p>
-            <p className="text-white font-bold text-sm mt-0.5">Let's build something strong together.</p>
+            <p className="text-zinc-500 text-xs">Need custom fabrication work?</p>
+            <p className="text-zinc-800 font-bold text-sm mt-0.5">Let's build something strong together.</p>
           </div>
           <button className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg transition-all duration-200 active:scale-95">
             Contact Us

@@ -3,6 +3,7 @@
 import HeroSlider from "./home/page";
 import ServiceSection from "./home/services";
 import AboutSection from "./home/about";
+import Project from "./home/projects";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSlider />
       <ServiceSection />
       <AboutSection />
+      <Project />
     </main>
   );
 }

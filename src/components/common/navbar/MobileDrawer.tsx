@@ -30,6 +30,7 @@ export default function MobileDrawer({ open, onClose }: Props) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      // document.documentElement.style.overflow = "hidden";
       document.body.style.paddingRight = "0px";
     } else {
       document.body.style.overflow = "";
@@ -83,7 +84,7 @@ export default function MobileDrawer({ open, onClose }: Props) {
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 min-h-screen overflow-y-auto overscroll-contain">
+        <div className="flex-1 min-h-screen overflow-y-auto bg-white overscroll-contain">
 
           {/* Quick actions */}
           <div className="flex gap-2 px-4 py-3 border-b border-gray-100">
