@@ -65,13 +65,6 @@ const projects = [
   },
 ];
 
-const stats = [
-  { value: "500+", label: "Projects" },
-  { value: "15+", label: "Years" },
-  { value: "100%", label: "Quality" },
-  { value: "24/7", label: "Support" },
-];
-
 const categoryColors: Record<string, string> = {
   Residential: "#FF6B00",
   Industrial: "#FF6B00",
@@ -91,243 +84,50 @@ export default function Project() {
   };
 
   return (
-    <section
-      style={{
-        background: "#ffffff",
-        padding: "60px 0 0 0",
-        fontFamily: "'Barlow', 'Oswald', sans-serif",
-        overflow: "hidden",
-      }}
-    >
-      {/* Google Fonts */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Oswald:wght@500;600;700&display=swap');
-
-        .proj-card {
-          flex: 0 0 260px;
-          height: 340px;
-          border-radius: 20px;
-          overflow: hidden;
-          position: relative;
-          scroll-snap-align: center;
-          cursor: pointer;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-        }
-        .proj-card:active {
-          transform: scale(0.97);
-        }
-        .proj-card img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-          transition: transform 0.4s ease;
-        }
-        .proj-card:hover img {
-          transform: scale(1.04);
-        }
-        .proj-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to bottom,
-            transparent 30%,
-            rgba(0,0,0,0.45) 58%,
-            rgba(0,0,0,0.85) 100%
-          );
-        }
-        .proj-bottom {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 14px 16px 16px;
-        }
-        .proj-badge {
-          display: inline-block;
-          padding: 3px 10px;
-          border-radius: 20px;
-          font-size: 10px;
-          font-weight: 600;
-          letter-spacing: 0.6px;
-          text-transform: uppercase;
-          background: #FF6B00;
-          color: #fff;
-          margin-bottom: 7px;
-        }
-        .proj-title {
-          font-family: 'Oswald', sans-serif;
-          font-size: 18px;
-          font-weight: 600;
-          color: #fff;
-          line-height: 1.2;
-          margin: 0 0 4px;
-          letter-spacing: 0.3px;
-        }
-        .proj-meta {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .proj-location {
-          font-family: 'Barlow', sans-serif;
-          font-size: 12px;
-          color: rgba(255,255,255,0.75);
-          letter-spacing: 0.2px;
-        }
-        .proj-dot {
-          width: 3px;
-          height: 3px;
-          background: rgba(255,255,255,0.4);
-          border-radius: 50%;
-        }
-        .proj-status {
-          font-size: 11px;
-          color: #4ade80;
-          font-weight: 500;
-          font-family: 'Barlow', sans-serif;
-        }
-
-        /* Scroll track */
-        .proj-track {
-          display: flex;
-          gap: 14px;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
-          padding: 8px 20px 16px;
-          scrollbar-width: none;
-        }
-        .proj-track::-webkit-scrollbar { display: none; }
-
-        /* Dots */
-        .dot-row {
-          display: flex;
-          justify-content: center;
-          gap: 6px;
-          margin-top: 6px;
-          padding-bottom: 4px;
-        }
-        .dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #e5e7eb;
-          transition: background 0.3s, width 0.3s;
-        }
-        .dot.active {
-          background: #FF6B00;
-          width: 20px;
-          border-radius: 4px;
-        }
-
-        /* Stats */
-        .stats-strip {
-          background: #f9fafb;
-          border-top: 1px solid #e5e7eb;
-          margin-top: 36px;
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-        }
-        .stat-item {
-          padding: 24px 10px;
-          text-align: center;
-          border-right: 1px solid #e5e7eb;
-          position: relative;
-        }
-        .stat-item:last-child { border-right: none; }
-        .stat-value {
-          font-family: 'Oswald', sans-serif;
-          font-size: 26px;
-          font-weight: 700;
-          color: #FF6B00;
-          line-height: 1;
-          margin-bottom: 4px;
-        }
-        .stat-label {
-          font-family: 'Barlow', sans-serif;
-          font-size: 11px;
-          color: #9ca3af;
-          text-transform: uppercase;
-          letter-spacing: 0.8px;
-          font-weight: 500;
-        }
-
-        /* Decorative line */
-        .accent-line {
-          width: 36px;
-          height: 3px;
-          background: #FF6B00;
-          border-radius: 2px;
-          margin: 8px 0 14px;
-        }
-      `}</style>
-
-      {/* Section Header */}
-      <div style={{ padding: "0 20px" }}>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "2.5px",
-            textTransform: "uppercase",
-            color: "#FF6B00",
-            margin: "0 0 6px",
-          }}
-        >
-          Our Projects
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Oswald', sans-serif",
-            fontSize: "30px",
-            fontWeight: 700,
-            color: "#111827",
-            margin: 0,
-            lineHeight: 1.1,
-            letterSpacing: "0.5px",
-          }}
-        >
-          Recent Fabrication
-          <br />
-          <span style={{ color: "#FF6B00" }}>Work</span>
+    <section className="bg-white pt-[60px] pb-0 overflow-hidden font-['Barlow','Oswald',sans-serif]">
+      {/* Section Header - Centered */}
+      <div className="px-5 text-center">
+        <h2 className="font-['Oswald',sans-serif] text-[30px] font-bold text-gray-900 m-0 leading-[1.1] tracking-[0.5px]">
+          Recent Weldings{" "}
+          <span className="text-[#FF6B00]">Work</span>
         </h2>
-        <div className="accent-line" />
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            fontSize: "13px",
-            color: "#6b7280",
-            lineHeight: 1.6,
-            margin: 0,
-            maxWidth: "300px",
-          }}
-        >
-          Precision-crafted welding and fabrication projects completed for
-          homes, shops and industries.
-        </p>
+        <div className="w-9 h-[3px] bg-[#FF6B00] rounded-[2px] mx-auto mt-2 mb-[14px]" />
       </div>
 
       {/* Swipe Cards */}
       <div
-        className="proj-track"
         ref={scrollRef}
         onScroll={handleScroll}
-        style={{ marginTop: "24px" }}
+        className="flex gap-[14px] overflow-x-auto snap-x snap-mandatory scrollbar-none px-5 pb-4 pt-2 mt-6"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {projects.map((p, i) => (
-          <div className="proj-card" key={p.id}>
-            <img src={p.image} alt={p.title} loading="lazy" />
-            <div className="proj-overlay" />
-            <div className="proj-bottom">
-              <span className="proj-badge">{p.category}</span>
-              <h3 className="proj-title">{p.title}</h3>
-              <div className="proj-meta">
-                <span className="proj-location">📍 {p.location}</span>
-                <div className="proj-dot" />
-                <span className="proj-status">✓ {p.status}</span>
+          <div
+            key={p.id}
+            className="flex-none w-[260px] h-[340px] rounded-[20px] overflow-hidden relative snap-center cursor-pointer transition-transform duration-200 ease-out hover:shadow-xl active:scale-[0.97] shadow-md"
+          >
+            <img
+              src={p.image}
+              alt={p.title}
+              loading="lazy"
+              className="w-full h-full object-cover block transition-transform duration-400 ease-out hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/45 to-black/85" />
+            <div className="absolute bottom-0 left-0 right-0 p-[14px_16px_16px]">
+              <span className="inline-block px-[10px] py-[3px] rounded-[20px] text-[10px] font-semibold tracking-[0.6px] uppercase bg-[#FF6B00] text-white mb-[7px]">
+                {p.category}
+              </span>
+              <h3 className="font-['Oswald',sans-serif] text-[18px] font-semibold text-white leading-[1.2] m-0 mb-1 tracking-[0.3px]">
+                {p.title}
+              </h3>
+              <div className="flex items-center gap-2">
+                <span className="font-['Barlow',sans-serif] text-xs text-white/75 tracking-[0.2px]">
+                  📍 {p.location}
+                </span>
+                <span className="w-[3px] h-[3px] bg-white/40 rounded-full" />
+                <span className="text-[11px] text-green-400 font-medium font-['Barlow',sans-serif]">
+                  ✓ {p.status}
+                </span>
               </div>
             </div>
           </div>
@@ -335,19 +135,16 @@ export default function Project() {
       </div>
 
       {/* Pagination dots */}
-      <div className="dot-row">
+      <div className="flex justify-center gap-1.5 mt-1.5 pb-1">
         {projects.map((_, i) => (
-          <div key={i} className={`dot${activeIdx === i ? " active" : ""}`} />
-        ))}
-      </div>
-
-      {/* Stats Strip */}
-      <div className="stats-strip">
-        {stats.map((s) => (
-          <div className="stat-item" key={s.label}>
-            <div className="stat-value">{s.value}</div>
-            <div className="stat-label">{s.label}</div>
-          </div>
+          <div
+            key={i}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              activeIdx === i
+                ? "w-5 bg-[#FF6B00] rounded-[4px]"
+                : "w-1.5 bg-gray-200"
+            }`}
+          />
         ))}
       </div>
     </section>

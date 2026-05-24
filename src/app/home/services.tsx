@@ -125,32 +125,15 @@ export default function ServiceSection() {
           className="mb-8 transition-all duration-700"
           style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)" }}
         >
-          {/* Tag */}
-          <div className="flex items-center mb-3">
-            <span className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-orange-600 uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" />
-              Our Services
-            </span>
-          </div>
 
           {/* Heading + desc — centered on mobile, left on desktop */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+          <div className="text-center">
             <div>
               <h2 className="text-[26px] md:text-[36px] font-extrabold leading-tight text-zinc-900 tracking-tight">
                 Professional Welding
                 <span className="text-orange-500"> &amp; Fabrication</span>
               </h2>
-              <p className="mt-2 text-[12.5px] md:text-sm text-zinc-500 max-w-xs leading-relaxed">
-                Strong, precise and reliable metal work solutions for residential and industrial projects.
-              </p>
             </div>
-            {/* Desktop CTA inline with heading */}
-            <button className="hidden md:inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-orange-200 active:scale-95 shrink-0">
-              Free Consultation
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
           </div>
         </div>
 

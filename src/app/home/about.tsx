@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const stats = [
-  { value: "500+", label: "Projects" },
-  { value: "15+", label: "Years" },
+  { value: "200+", label: "Projects" },
+  { value: "3+", label: "Years" },
   { value: "24/7", label: "Support" },
   { value: "100%", label: "Quality" },
 ];
@@ -76,20 +76,13 @@ export default function AboutSection() {
 
         {/* Badge + Heading */}
         <div
-          className="mb-6 transition-all duration-700"
+          className="mb-6 transition-all duration-700 text-center"
           style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)" }}
         >
-          <span className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-orange-600 uppercase mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block" />
-            About Us
-          </span>
           <h2 className="text-2xl md:text-4xl font-extrabold text-zinc-900 leading-tight">
             Trusted Welding &amp;{" "}
-            <span className="text-orange-500">Fabrication Experts</span>
+            <span className="text-orange-500">Weldings Experts</span>
           </h2>
-          <p className="mt-2 text-sm text-zinc-500 max-w-md leading-relaxed">
-            We provide durable and precision-focused metal work solutions for homes, shops and industrial projects.
-          </p>
         </div>
 
         {/* Main Content: Image + Features */}
@@ -144,19 +137,7 @@ export default function AboutSection() {
 
         </div>
 
-        {/* CTA Strip */}
-        <div
-          className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 transition-all duration-700"
-          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(12px)", transitionDelay: "0.5s" }}
-        >
-          <div>
-            <p className="text-zinc-500 text-xs">Need custom fabrication work?</p>
-            <p className="text-zinc-800 font-bold text-sm mt-0.5">Let's build something strong together.</p>
-          </div>
-          <button className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg transition-all duration-200 active:scale-95">
-            Contact Us
-          </button>
-        </div>
+       
 
       </div>
     </section>
