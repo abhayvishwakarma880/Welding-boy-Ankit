@@ -101,7 +101,7 @@ export default function HeroSlider() {
                         * rippleStrength;
 
           vec2 rippleUv = uv + normalize(uv - center) * ripple;
-
+ 
           vec4 t1 = texture2D(texture1, rippleUv);
           vec4 t2 = texture2D(texture2, uv);
 

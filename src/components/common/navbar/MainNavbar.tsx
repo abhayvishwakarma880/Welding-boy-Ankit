@@ -187,15 +187,11 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
 
                     {/* 3-column Dropdown */}
                     <div
-                      className={`fixed mt-1 w-[520px] bg-white border border-gray-200 rounded-xl shadow-2xl z-[9999] p-4 transition-all duration-300 ease-out origin-top ${
+                      className={`absolute top-full left-0 mt-1 w-[520px] bg-white border border-gray-200 rounded-xl shadow-2xl z-[9999] p-4 transition-all duration-300 ease-out origin-top ${
                         catOpen
                           ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
                       }`}
-                      style={{
-                        top: dropdownRef.current ? dropdownRef.current.getBoundingClientRect().bottom + window.scrollY : "auto",
-                        left: dropdownRef.current ? dropdownRef.current.getBoundingClientRect().left : "auto",
-                      }}
                     >
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-1">Browse Categories</p>
                       <div className="grid grid-cols-3 gap-1">
