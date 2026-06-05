@@ -27,10 +27,10 @@ export default function Footer() {
       {/* Top accent line */}
       <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 grid grid-cols-2 lg:grid-cols-4 gap-10">
 
         {/* Col 1 — Brand */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 col-span-2 lg:col-span-1">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-lg bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
               <Flame className="w-5 h-5 text-white" strokeWidth={2.5} />
@@ -88,7 +88,7 @@ export default function Footer() {
         </div>
 
         {/* Col 4 — Contact */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 col-span-2 lg:col-span-1">
           <h3 className="text-white font-bold text-sm uppercase tracking-widest">Contact Us</h3>
           <div className="flex flex-col gap-4">
 
@@ -112,18 +112,18 @@ export default function Footer() {
               </div>
             </Link>
 
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
-                <MapPin className="w-3.5 h-3.5 text-slate-400" />
+            <a href="https://maps.app.goo.gl/kKaWEiqhF2T35v1o6" target="_blank" className="flex items-start gap-3 group">
+              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:border-orange-500 transition-all duration-300">
+                <MapPin className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors duration-300" />
               </div>
               <div>
                 <p className="text-[11px] text-slate-600 uppercase tracking-wider font-semibold">Address</p>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-400 leading-relaxed group-hover:text-orange-400 transition-colors duration-200">
                   Lakhua Chauraha, Khadda<br />
                   Kushinagar, UP — 274802
                 </p>
               </div>
-            </div>
+            </a>
 
           </div>
         </div>

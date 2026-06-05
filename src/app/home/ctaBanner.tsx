@@ -32,7 +32,7 @@ export default function CTABanner() {
         </div>
 
         {/* Row 2: Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-3">
+        <div className="flex flex-row sm:flex-row items-center gap-3">
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-7 py-3 bg-white text-orange-600 font-bold text-sm rounded-md shadow-lg shadow-black/20 transition-all duration-300 hover:scale-105 active:scale-95"
@@ -48,7 +48,7 @@ export default function CTABanner() {
         </div>
 
         {/* Row 3: Trust Indicators */}
-        <div className="flex flex-col sm:flex-row items-center gap-5 text-white/75 text-xs pt-4 border-t border-white/20 w-full justify-center">
+        <div className="flex flex-row sm:flex-row items-center gap-5 text-white/75 text-xs pt-4 border-t border-white/20 w-full justify-center">
           <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> 10+ Years Experience</span>
           <span className="hidden sm:block text-white/30">|</span>
           <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> 500+ Satisfied Clients</span>

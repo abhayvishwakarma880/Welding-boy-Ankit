@@ -131,9 +131,9 @@ const productsData: Product[] = [
 ];
 
 const tabData = [
-  { id: "Iron", label: "Wrought Iron", icon: Hammer, desc: "Classic Strength & Artistry" },
-  { id: "Steel", label: "Stainless Steel", icon: Shield, desc: "Sleek Modernity & Durability" },
-  { id: "Aluminium", label: "Aluminium Section", icon: Layers, desc: "Lightweight Precision & Finish" },
+  { id: "Iron", label: "Iron", icon: Hammer, desc: "Classic Strength & Artistry" },
+  { id: "Steel", label: "Steel", icon: Shield, desc: "Sleek Modernity & Durability" },
+  { id: "Aluminium", label: "Aluminium", icon: Layers, desc: "Lightweight Precision & Finish" },
 ] as const;
 
 export default function PopularWorks() {
