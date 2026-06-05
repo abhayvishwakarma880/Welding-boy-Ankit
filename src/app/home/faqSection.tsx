@@ -53,16 +53,16 @@ export default function FAQSection() {
   return (
     <section className="bg-white relative py-12 px-6 md:px-12 overflow-hidden font-sans max-w-7xl mx-4 md:mx-8 xl:mx-auto mt-16 mb-0">
       {/* Accent line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3.5px] bg-gradient-to-r from-transparent via-orange-500 to-transparent rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3.5px] bg-gradient-to-r from-transparent via-brand to-transparent rounded-full" />
 
       <div className="max-w-3xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-none">
             Frequently{" "}
-            <span className="text-orange-500 relative">
+            <span className="text-brand relative">
               Asked
-              <span className="absolute bottom-1 left-0 w-full h-[6px] bg-orange-200/50 -z-10 rounded-full" />
+              <span className="absolute bottom-1 left-0 w-full h-[6px] -z-10 rounded-full" />
             </span>{" "}
             Questions
           </h2>

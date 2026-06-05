@@ -37,7 +37,7 @@ export default function Footer() {
             </div>
             <div className="leading-none">
               <p className="text-white font-extrabold text-base tracking-tight">Vishwakarma</p>
-              <p className="text-orange-400 text-[11px] font-semibold uppercase tracking-widest">Welding Shop</p>
+              <p className="text-brand text-[11px] font-semibold uppercase tracking-widest">Welding Shop</p>
             </div>
           </div>
           <p className="text-sm leading-relaxed text-slate-500">

@@ -68,7 +68,7 @@ export default function AboutSection() {
     <section ref={sectionRef} className="bg-white py-10 px-4 relative overflow-hidden">
 
       {/* Subtle orange glow top-left */}
-      <div className="absolute -top-20 -left-20 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full blur-3xl pointer-events-none" />
       {/* Dot grid background */}
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(234,88,12,0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
@@ -81,7 +81,7 @@ export default function AboutSection() {
         >
           <h2 className="text-2xl md:text-4xl font-extrabold text-zinc-900 leading-tight">
             Trusted Welding &amp;{" "}
-            <span className="text-orange-500">Weldings Experts</span>
+            <span className="text-brand">Weldings Experts</span>
           </h2>
         </div>
 
@@ -108,7 +108,7 @@ export default function AboutSection() {
             <div className="absolute bottom-0 left-0 right-0 grid grid-cols-4 divide-x divide-white/10 bg-black/60 backdrop-blur-sm">
               {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col items-center py-3">
-                  <span className="text-orange-400 font-extrabold text-base md:text-lg leading-none">{stat.value}</span>
+                  <span className="text-brand font-extrabold text-base md:text-lg leading-none">{stat.value}</span>
                   <span className="text-zinc-400 text-[10px] mt-0.5 uppercase tracking-wider">{stat.label}</span>
                 </div>
               ))}
@@ -123,10 +123,10 @@ export default function AboutSection() {
             {features.map((f, i) => (
               <div
                 key={f.title}
-                className="bg-white border border-zinc-200 rounded-xl p-4 flex flex-col gap-2 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-100 transition-all duration-300"
+                className="bg-white border border-zinc-200 rounded-xl p-4 flex flex-col gap-2 hover:border-brand-hover hover:shadow-lg hover:shadow-orange-100 transition-all duration-300"
                 style={{ transitionDelay: `${0.2 + i * 0.07}s` }}
               >
-                <div className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-brandBG-icon border border-orange-100 flex items-center justify-center">
                   {f.icon}
                 </div>
                 <h3 className="text-zinc-800 font-semibold text-sm">{f.title}</h3>

@@ -1,6 +1,6 @@
 export const colors = {
+  brand: "#f97316",        // ← CHANGE THIS to update orange everywhere
+  brandHover: "#ea6c0a",   // slightly darker for hover states
   primary: "#111827",
-  secondary: "#f97316",
-  accent: "#eab308",
   white: "#ffffff",
-}
+};

@@ -7,7 +7,7 @@ export default function CTABanner() {
   return (
     <section className="relative w-full py-5 overflow-hidden font-sans">
       {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-amber-600" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand via-brand to-brand-hover" />
 
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -35,7 +35,7 @@ export default function CTABanner() {
         <div className="flex flex-row sm:flex-row items-center gap-3">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3 bg-white text-orange-600 font-bold text-sm rounded-md shadow-lg shadow-black/20 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="inline-flex items-center gap-2 px-7 py-3 bg-white text-brand font-bold text-sm rounded-md shadow-lg shadow-black/20 transition-all duration-300 hover:scale-105 active:scale-95"
           >
             Get Started <span>→</span>
           </Link>

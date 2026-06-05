@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* ✅ Brand color — change here to update orange across entire website */
+  --color-brand: #f97316;
+  --color-brand-hover: #ea6c0a;
+
+  --color-brandBG-icon: #FFF7ED;
 }
 
 @theme inline {
@@ -10,6 +16,12 @@
   --color-foreground: var(--foreground);
   --font-outfit: var(--font-outfit);
   --font-family-sans: var(--font-outfit), 'Outfit', sans-serif;
+
+  /* Tailwind utilities: bg-brand, text-brand, border-brand */
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+
+  --color-brandBG-icon: var(--color-brandBG-icon);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,3 +59,11 @@ body {
   0% { transform: translateY(-100%); opacity: 0.5; }
   100% { transform: translateY(0); opacity: 1; }
 }
+
+/* ✅ Brand color utilities — change --color-brand in :root to update everywhere */
+.bg-brand { background-color: var(--color-brand) !important; }
+.bg-brand-hover:hover { background-color: var(--color-brand-hover) !important; }
+.text-brand { color: var(--color-brand) !important; }
+.border-brand { border-color: var(--color-brand) !important; }
+.fill-brand { fill: var(--color-brand) !important; }
+.stroke-brand { stroke: var(--color-brand) !important; }

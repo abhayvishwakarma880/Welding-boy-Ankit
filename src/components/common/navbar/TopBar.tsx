@@ -32,7 +32,7 @@ export default function TopBar() {
     "flex items-center gap-1.5 px-3 py-1.5 rounded text-white text-xs font-semibold border border-white/30 hover:bg-black/20 transition cursor-pointer";
 
   return (
-    <div className="w-full bg-orange-500 text-white px-4 py-2">
+    <div className="w-full bg-brand text-white px-4 py-2">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* Phone Number - always visible */}

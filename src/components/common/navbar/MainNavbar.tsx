@@ -67,21 +67,21 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                 className="object-contain rounded"
                 unoptimized
               />
-              <span className="ml-2 text-sm font-bold text-orange-600 leading-tight">
+              <span className="ml-2 text-sm font-bold text-brand leading-tight">
                 Shree Vishwakarma <br />
                  Welding work
               </span>
             </Link>
 
             {/* Wishlist icon */}
-            <Link href="/wishlist" className="relative p-2 text-gray-600 hover:text-orange-500 transition shrink-0">
+            <Link href="/wishlist" className="relative p-2 text-gray-600 hover:text-brand transition shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
               </svg>
             </Link>
 
             {/* Cart icon */}
-            <Link href="/cart" className="relative p-2 text-gray-600 hover:text-orange-500 transition shrink-0">
+            <Link href="/cart" className="relative p-2 text-gray-600 hover:text-brand transition shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6h13M7 13L5.4 5M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
               </svg>
@@ -91,13 +91,13 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
 
           {/* Mobile Row 2: Search bar full width */}
           <div className="px-4 pb-2.5">
-            <div className="flex items-center border-2 border-orange-500 rounded-md overflow-hidden">
+            <div className="flex items-center border-2 border-brand rounded-md overflow-hidden">
               <input
                 type="text"
                 placeholder="Search products, services..."
                 className="flex-1 px-3 py-2 text-sm text-gray-700 outline-none bg-white"
               />
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 transition">
+              <button className="bg-brand text-white px-4 py-3 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                 </svg>
@@ -137,19 +137,19 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                   <div className="flex items-center gap-4">
 
                   {/* Search */}
-                  <div className="flex flex-1 items-center border-2 border-orange-500 rounded-md overflow-hidden">
+                  <div className="flex flex-1 items-center border-2 border-brand rounded-md overflow-hidden">
                     <input
                       type="text"
                       placeholder="Search products, services..."
                       className="flex-1 px-4 py-2 text-sm text-gray-700 outline-none bg-white"
                     />
-                    <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 text-sm font-medium transition">
+                    <button className="bg-brand text-white px-5 py-2 text-sm font-medium transition">
                       Search
                     </button>
                   </div>
 
                   {/* Wishlist */}
-                  <Link href="/wishlist" className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-lg text-gray-600 hover:text-orange-500 hover:border-orange-400 transition shrink-0 min-w-[130px]">
+                  <Link href="/wishlist" className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition shrink-0 min-w-[130px]">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
                     </svg>
@@ -157,7 +157,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                   </Link>
 
                   {/* Cart */}
-                  <Link href="/cart" className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-lg text-gray-600 hover:text-orange-500 hover:border-orange-400 transition shrink-0 min-w-[130px]">
+                  <Link href="/cart" className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition shrink-0 min-w-[130px]">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6h13M7 13L5.4 5M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
                     </svg>
@@ -174,7 +174,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                   <div className="relative shrink-0" ref={dropdownRef}>
                     <button
                       onClick={() => setCatOpen(!catOpen)}
-                      className="flex items-center gap-2 px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded transition cursor-pointer"
+                      className="flex items-center gap-2 px-5 py-2 bg-brand text-white text-sm font-medium rounded transition cursor-pointer"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -199,9 +199,9 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                           <button
                             key={cat}
                             onClick={() => setCatOpen(false)}
-                            className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-orange-500 hover:text-white rounded-lg transition text-left cursor-pointer"
+                            className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-brand hover:text-white rounded-lg transition text-left cursor-pointer"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
                             {cat}
                           </button>
                         ))}
@@ -217,7 +217,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                       <Link
                         key={link.name}
                         href={link.path}
-                        className="shrink-0 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-orange-500 transition whitespace-nowrap"
+                        className="shrink-0 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-brand transition whitespace-nowrap"
                       >
                         {link.name}
                       </Link>
@@ -228,13 +228,13 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                   <div className={`transition-all duration-300 ${
                     isFixed ? "w-48 opacity-100 mx-2" : "w-0 opacity-0 pointer-events-none"
                   }`}>
-                    <div className="flex items-center border-2 border-orange-500 rounded-md overflow-hidden w-full">
+                    <div className="flex items-center border-2 border-brand rounded-md overflow-hidden w-full">
                       <input
                         type="text"
                         placeholder="Search..."
                         className="w-full px-3 py-1.5 text-sm text-gray-700 outline-none bg-white min-w-0"
                       />
-                      <button className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 transition shrink-0">
+                      <button className="bg-brand text-white px-3 py-2 transition shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                         </svg>
@@ -246,13 +246,13 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                   <div className={`flex items-center gap-2 shrink-0 transition-all duration-300 ${
                     isFixed ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 translate-x-4 pointer-events-none w-0 overflow-hidden"
                   }`}>
-                    <Link href="/wishlist" className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-gray-600 hover:text-orange-500 hover:border-orange-400 transition text-sm font-medium">
+                    <Link href="/wishlist" className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition text-sm font-medium">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
                       </svg>
                       Wishlist
                     </Link>
-                    <Link href="/cart" className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition text-sm font-medium">
+                    <Link href="/cart" className="flex items-center gap-1.5 px-3 py-1.5 bg-brand text-white rounded-lg transition text-sm font-medium">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6h13M7 13L5.4 5M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
                       </svg>
