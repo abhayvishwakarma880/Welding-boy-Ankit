@@ -205,15 +205,15 @@ export default function RecentSideWork() {
       />
       
       {/* Visual Accent Line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3.5px] bg-gradient-to-r from-transparent via-orange-500 to-transparent rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3.5px] bg-gradient-to-r from-transparent via-brand to-transparent rounded-full" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* --- Heading Area --- */}
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-none">
-            Recent <span className="text-orange-500 relative">Side Works
-              <span className="absolute bottom-1 left-0 w-full h-[6px] bg-orange-200/50 -z-10 rounded-full"></span>
+            Recent <span className="text-brand relative">Side Works
+              <span className="absolute bottom-1 left-0 w-full h-[6px] bg-brand/20 -z-10 rounded-full"></span>
             </span>
           </h2>
           <p className="mt-3 text-sm md:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
@@ -227,7 +227,7 @@ export default function RecentSideWork() {
           {showLeftArrow && (
             <button
               onClick={() => handleScroll("left")}
-              className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white hover:bg-orange-500 border border-slate-200 text-slate-700 hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer opacity-0 group-hover:opacity-100 md:opacity-100"
+              className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white hover:bg-brand border border-slate-200 text-slate-700 hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer opacity-0 group-hover:opacity-100 md:opacity-100"
               aria-label="Previous Works"
             >
               <ChevronLeft className="w-5 h-5 stroke-[2.5px]" />
@@ -237,7 +237,7 @@ export default function RecentSideWork() {
           {showRightArrow && (
             <button
               onClick={() => handleScroll("right")}
-              className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white hover:bg-orange-500 border border-slate-200 text-slate-700 hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer opacity-0 group-hover:opacity-100 md:opacity-100"
+              className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white hover:bg-brand border border-slate-200 text-slate-700 hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer opacity-0 group-hover:opacity-100 md:opacity-100"
               aria-label="Next Works"
             >
               <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
@@ -266,7 +266,7 @@ export default function RecentSideWork() {
             {sideWorksData.map((work) => (
               <div
                 key={work.id}
-                className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center group/card transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/5 hover:border-orange-200 hover:-translate-y-1.5 flex flex-col justify-between"
+                className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center group/card transition-all duration-300 hover:shadow-2xl hover:shadow-brand/5 hover:border-brand/30 hover:-translate-y-1.5 flex flex-col justify-between"
               >
                 {/* Work Image Area */}
                 <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden shrink-0">
@@ -283,7 +283,7 @@ export default function RecentSideWork() {
 
                 {/* Card Content */}
                 <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="text-base md:text-lg font-bold text-slate-800 line-clamp-1 group-hover/card:text-orange-500 transition-colors duration-200">
+                  <h3 className="text-base md:text-lg font-bold text-slate-800 line-clamp-1 group-hover/card:text-brand transition-colors duration-200">
                     {work.title}
                   </h3>
 
@@ -297,7 +297,7 @@ export default function RecentSideWork() {
                   <Link
                     href="/contact"
                     onClick={handleLinkClick}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-orange-500 to-amber-500 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-orange-500/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:shadow-lg hover:shadow-orange-500/30"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:shadow-lg hover:shadow-brand/30"
                   >
                     <span>View Project</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -324,7 +324,7 @@ export default function RecentSideWork() {
                 className="w-8 h-3 flex items-center justify-center group/dot focus:outline-none"
                 aria-label={`Go to slide ${i + 1}`}
               >
-                <span className="w-2 h-2 rounded-full bg-slate-200 group-hover/dot:bg-orange-300 transition-all duration-300 group-hover/dot:w-3 group-hover/dot:h-3" />
+                <span className="w-2 h-2 rounded-full bg-slate-200 group-hover/dot:bg-brand/50 transition-all duration-300 group-hover/dot:w-3 group-hover/dot:h-3" />
               </button>
             ))}
           </div>

@@ -11,7 +11,7 @@ const projects = [
     status: "Completed",
     image:
       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&q=80",
-    color: "#FF6B00",
+    color: "var(--color-brand)",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const projects = [
     status: "Completed",
     image:
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&q=80",
-    color: "#FF6B00",
+    color: "var(--color-brand)",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const projects = [
     status: "Completed",
     image:
       "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400&h=300&fit=crop&q=80",
-    color: "#FF6B00",
+    color: "var(--color-brand)",
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const projects = [
     status: "Completed",
     image:
       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&q=80",
-    color: "#FF6B00",
+    color: "var(--color-brand)",
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ const projects = [
     status: "Completed",
     image:
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop&q=80",
-    color: "#FF6B00",
+    color: "var(--color-brand)",
   },
   {
     id: 6,
@@ -61,14 +61,14 @@ const projects = [
     status: "Completed",
     image:
       "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop&q=80",
-    color: "#FF6B00",
+    color: "var(--color-brand)",
   },
 ];
 
 const categoryColors: Record<string, string> = {
-  Residential: "#FF6B00",
-  Industrial: "#FF6B00",
-  "Custom Work": "#FF6B00",
+  Residential: "var(--color-brand)",
+  Industrial: "var(--color-brand)",
+  "Custom Work": "var(--color-brand)",
 };
 
 export default function Project() {
@@ -89,9 +89,9 @@ export default function Project() {
       <div className="px-5 text-center">
         <h2 className="font-['Oswald',sans-serif] text-[30px] font-bold text-gray-900 m-0 leading-[1.1] tracking-[0.5px]">
           Recent Weldings{" "}
-          <span className="text-[#FF6B00]">Work</span>
+          <span className="text-brand font-bold text-[30px]">Work</span>
         </h2>
-        <div className="w-9 h-[3px] bg-[#FF6B00] rounded-[2px] mx-auto mt-2 mb-[14px]" />
+        <div className="w-9 h-[3px] bg-brand rounded-[2px] mx-auto mt-2 mb-[14px]" />
       </div>
 
       {/* Swipe Cards */}
@@ -114,7 +114,7 @@ export default function Project() {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/45 to-black/85" />
             <div className="absolute bottom-0 left-0 right-0 p-[14px_16px_16px]">
-              <span className="inline-block px-[10px] py-[3px] rounded-[20px] text-[10px] font-semibold tracking-[0.6px] uppercase bg-[#FF6B00] text-white mb-[7px]">
+              <span className="inline-block px-[10px] py-[3px] rounded-[20px] text-[10px] font-semibold tracking-[0.6px] uppercase bg-brand text-white mb-[7px]">
                 {p.category}
               </span>
               <h3 className="font-['Oswald',sans-serif] text-[18px] font-semibold text-white leading-[1.2] m-0 mb-1 tracking-[0.3px]">
@@ -141,7 +141,7 @@ export default function Project() {
             key={i}
             className={`h-1.5 rounded-full transition-all duration-300 ${
               activeIdx === i
-                ? "w-5 bg-[#FF6B00] rounded-[4px]"
+                ? "w-5 bg-brand rounded-[4px]"
                 : "w-1.5 bg-gray-200"
             }`}
           />

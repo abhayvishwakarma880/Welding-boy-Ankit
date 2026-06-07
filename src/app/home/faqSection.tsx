@@ -80,8 +80,8 @@ export default function FAQSection() {
                 key={faq.id}
                 className={`border rounded-md overflow-hidden transition-all duration-300 ${
                   isOpen
-                    ? "border-orange-300 shadow-md shadow-orange-500/10"
-                    : "border-slate-200 hover:border-orange-200"
+                    ? "border-brand/40 shadow-md shadow-brand/10"
+                    : "border-slate-200 hover:border-brand/20"
                 }`}
               >
                 {/* Question Row */}
@@ -91,7 +91,7 @@ export default function FAQSection() {
                 >
                   <span
                     className={`text-sm md:text-base font-semibold transition-colors duration-200 ${
-                      isOpen ? "text-orange-500" : "text-slate-800 group-hover:text-orange-500"
+                      isOpen ? "text-brand" : "text-slate-800 group-hover:text-brand"
                     }`}
                   >
                     {faq.question}
@@ -99,8 +99,8 @@ export default function FAQSection() {
                   <span
                     className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center border transition-all duration-300 ${
                       isOpen
-                        ? "bg-orange-500 border-orange-500 rotate-45"
-                        : "bg-white border-slate-200 group-hover:border-orange-300"
+                        ? "bg-brand border-brand rotate-45"
+                        : "bg-white border-slate-200 group-hover:border-brand/40"
                     }`}
                   >
                     <Plus

@@ -9,10 +9,10 @@ const services = [
     desc: "Strong and durable welding solutions.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-        <path d="M6 34L18 14l4 6 6-10 6 24" stroke="#ea580c" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="18" cy="14" r="2.5" fill="#ea580c" fillOpacity="0.2" stroke="#ea580c" strokeWidth="1.5"/>
-        <path d="M26 10l3-3M29 10l-3-3" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M30 16l1.5-1.5M31.5 16L30 14.5" stroke="#ea580c" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M6 34L18 14l4 6 6-10 6 24" className="stroke-brand" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="18" cy="14" r="2.5" className="fill-brand stroke-brand" fillOpacity="0.2" strokeWidth="1.5"/>
+        <path d="M26 10l3-3M29 10l-3-3" className="stroke-brand" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M30 16l1.5-1.5M31.5 16L30 14.5" className="stroke-brand" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -22,11 +22,11 @@ const services = [
     desc: "Custom metal structures with precision.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-        <rect x="8" y="8" width="10" height="10" rx="1.5" stroke="#ea580c" strokeWidth="2" fill="#ea580c" fillOpacity="0.1"/>
-        <rect x="22" y="8" width="10" height="10" rx="1.5" stroke="#ea580c" strokeWidth="2" fill="#ea580c" fillOpacity="0.1"/>
-        <rect x="8" y="22" width="10" height="10" rx="1.5" stroke="#ea580c" strokeWidth="2" fill="#ea580c" fillOpacity="0.1"/>
-        <rect x="22" y="22" width="10" height="10" rx="1.5" stroke="#ea580c" strokeWidth="2" fill="#ea580c" fillOpacity="0.1"/>
-        <path d="M18 13h4M27 18v4M22 27h-4M13 22v-4" stroke="#ea580c" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="8" y="8" width="10" height="10" rx="1.5" className="stroke-brand fill-brand" strokeWidth="2" fillOpacity="0.1"/>
+        <rect x="22" y="8" width="10" height="10" rx="1.5" className="stroke-brand fill-brand" strokeWidth="2" fillOpacity="0.1"/>
+        <rect x="8" y="22" width="10" height="10" rx="1.5" className="stroke-brand fill-brand" strokeWidth="2" fillOpacity="0.1"/>
+        <rect x="22" y="22" width="10" height="10" rx="1.5" className="stroke-brand fill-brand" strokeWidth="2" fillOpacity="0.1"/>
+        <path d="M18 13h4M27 18v4M22 27h-4M13 22v-4" className="stroke-brand" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -36,13 +36,13 @@ const services = [
     desc: "Modern safety designs for properties.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-        <rect x="6" y="8" width="28" height="24" rx="2" stroke="#ea580c" strokeWidth="2"/>
-        <line x1="20" y1="8" x2="20" y2="32" stroke="#ea580c" strokeWidth="2"/>
-        <line x1="6" y1="14" x2="34" y2="14" stroke="#ea580c" strokeWidth="1.5"/>
-        <line x1="6" y1="20" x2="34" y2="20" stroke="#ea580c" strokeWidth="1.5"/>
-        <line x1="6" y1="26" x2="34" y2="26" stroke="#ea580c" strokeWidth="1.5"/>
-        <circle cx="18" cy="20" r="1.8" fill="#ea580c"/>
-        <circle cx="22" cy="20" r="1.8" fill="#ea580c"/>
+        <rect x="6" y="8" width="28" height="24" rx="2" className="stroke-brand" strokeWidth="2"/>
+        <line x1="20" y1="8" x2="20" y2="32" className="stroke-brand" strokeWidth="2"/>
+        <line x1="6" y1="14" x2="34" y2="14" className="stroke-brand" strokeWidth="1.5"/>
+        <line x1="6" y1="20" x2="34" y2="20" className="stroke-brand" strokeWidth="1.5"/>
+        <line x1="6" y1="26" x2="34" y2="26" className="stroke-brand" strokeWidth="1.5"/>
+        <circle cx="18" cy="20" r="1.8" className="fill-brand"/>
+        <circle cx="22" cy="20" r="1.8" className="fill-brand"/>
       </svg>
     ),
   },
@@ -52,10 +52,10 @@ const services = [
     desc: "Heavy-duty fabrication for industries.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-        <path d="M8 32V18l8-8h8l8 8v14H8z" stroke="#ea580c" strokeWidth="2" fill="#ea580c" fillOpacity="0.07"/>
-        <rect x="15" y="22" width="10" height="10" rx="1" stroke="#ea580c" strokeWidth="1.8"/>
-        <path d="M12 18h4v4h-4zM24 18h4v4h-4z" stroke="#ea580c" strokeWidth="1.5" fill="#ea580c" fillOpacity="0.1"/>
-        <path d="M16 10l4-5 4 5" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M8 32V18l8-8h8l8 8v14H8z" className="stroke-brand fill-brand" strokeWidth="2" fillOpacity="0.07"/>
+        <rect x="15" y="22" width="10" height="10" rx="1" className="stroke-brand" strokeWidth="1.8"/>
+        <path d="M12 18h4v4h-4zM24 18h4v4h-4z" className="stroke-brand fill-brand" strokeWidth="1.5" fillOpacity="0.1"/>
+        <path d="M16 10l4-5 4 5" className="stroke-brand" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -65,9 +65,9 @@ const services = [
     desc: "Quick maintenance and metal repairs.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-        <path d="M28 12a8 8 0 0 0-11.3 11.3L7 33l2.8 2.8 9.7-9.7A8 8 0 0 0 28 12z" stroke="#ea580c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#ea580c" fillOpacity="0.07"/>
-        <path d="M25 15l-8 8" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round"/>
-        <circle cx="27" cy="13" r="2" fill="#ea580c"/>
+        <path d="M28 12a8 8 0 0 0-11.3 11.3L7 33l2.8 2.8 9.7-9.7A8 8 0 0 0 28 12z" className="stroke-brand fill-brand" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fillOpacity="0.07"/>
+        <path d="M25 15l-8 8" className="stroke-brand" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="27" cy="13" r="2" className="fill-brand"/>
       </svg>
     ),
   },
@@ -77,10 +77,10 @@ const services = [
     desc: "Tailored solutions based on requirements.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-        <path d="M8 32l4-12 8-12 8 12 4 12H8z" stroke="#ea580c" strokeWidth="2" strokeLinejoin="round" fill="#ea580c" fillOpacity="0.07"/>
-        <path d="M20 8v24M12 20h16" stroke="#ea580c" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="20" cy="20" r="4" stroke="#ea580c" strokeWidth="1.8" fill="#ea580c" fillOpacity="0.15"/>
-        <circle cx="20" cy="20" r="1.5" fill="#ea580c"/>
+        <path d="M8 32l4-12 8-12 8 12 4 12H8z" className="stroke-brand fill-brand" strokeWidth="2" strokeLinejoin="round" fillOpacity="0.07"/>
+        <path d="M20 8v24M12 20h16" className="stroke-brand" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="20" cy="20" r="4" className="stroke-brand fill-brand" strokeWidth="1.8" fillOpacity="0.15"/>
+        <circle cx="20" cy="20" r="1.5" className="fill-brand"/>
       </svg>
     ),
   },
@@ -115,8 +115,8 @@ export default function ServiceSection() {
         }}
       />
 
-      {/* Top orange accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-orange-400 to-transparent" />
+      {/* Top brand accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand via-brand/40 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 
@@ -131,7 +131,7 @@ export default function ServiceSection() {
             <div>
               <h2 className="text-[26px] md:text-[36px] font-extrabold leading-tight text-zinc-900 tracking-tight">
                 Professional Welding
-                <span className="text-orange-500"> &amp; Fabrication</span>
+                <span className="text-brand"> &amp; Fabrication</span>
               </h2>
             </div>
           </div>
@@ -143,7 +143,7 @@ export default function ServiceSection() {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="group relative bg-white border border-zinc-200 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-orange-300 hover:shadow-xl hover:shadow-orange-100 hover:-translate-y-1"
+              className="group relative bg-white border border-zinc-200 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-brand-hover hover:shadow-xl hover:shadow-brand-shadow/20 hover:-translate-y-1"
               style={{
                 minHeight: "160px",
                 opacity: visible ? 1 : 0,
@@ -152,20 +152,20 @@ export default function ServiceSection() {
               }}
             >
               {/* Top orange slide-in line on hover */}
-              <div className="absolute top-0 left-0 h-[2.5px] w-0 group-hover:w-full bg-gradient-to-r from-orange-500 to-orange-300 transition-all duration-400 rounded-t-xl" />
+              <div className="absolute top-0 left-0 h-[2.5px] w-0 group-hover:w-full bg-gradient-to-r from-brand to-brand-hover transition-all duration-400 rounded-t-xl" />
 
               {/* Top-right ambient */}
-              <div className="absolute top-0 right-0 w-14 h-14 pointer-events-none bg-gradient-radial from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-0 right-0 w-14 h-14 pointer-events-none bg-gradient-radial from-brand-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="p-4 flex flex-col h-full gap-3">
                 {/* Icon box */}
-                <div className="w-9 h-9 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 group-hover:bg-orange-100 group-hover:border-orange-200 transition-colors duration-300">
+                <div className="w-9 h-9 rounded-lg bg-brandBG-icon border border-brand flex items-center justify-center shrink-0 text-white group-hover:border-brand-200 transition-colors duration-300">
                   {service.icon}
                 </div>
 
                 {/* Text */}
                 <div className="mt-auto flex flex-col gap-1">
-                  <h3 className="text-[13px] md:text-[13.5px] font-semibold text-zinc-800 leading-snug group-hover:text-orange-600 transition-colors duration-200">
+                  <h3 className="text-[13px] md:text-[13.5px] font-semibold text-zinc-800 leading-snug group-hover:text-brand-hover transition-colors duration-200">
                     {service.heading}
                   </h3>
                   <p className="text-[10.5px] md:text-[11px] text-zinc-400 leading-relaxed">
@@ -179,7 +179,7 @@ export default function ServiceSection() {
 
         {/* ── Mobile CTA Strip ── */}
         <div
-          className="mt-5 md:hidden flex items-center justify-between bg-orange-50 border border-orange-200 rounded-xl px-4 py-3"
+          className="mt-5 md:hidden flex items-center justify-between bg-brand-50 border border-brand-200 rounded-xl px-4 py-3"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(12px)",
@@ -190,7 +190,7 @@ export default function ServiceSection() {
             <p className="text-[11px] text-zinc-500 leading-tight">Need a custom solution?</p>
             <p className="text-[13px] font-bold text-zinc-800">Get a free consultation</p>
           </div>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white text-[11px] font-bold uppercase tracking-wide px-4 py-2 rounded-lg transition-all duration-200 active:scale-95 shrink-0">
+          <button className="bg-brand hover:bg-brand-hover text-white text-[11px] font-bold uppercase tracking-wide px-4 py-2 rounded-lg transition-all duration-200 active:scale-95 shrink-0">
             Contact Us
           </button>
         </div>

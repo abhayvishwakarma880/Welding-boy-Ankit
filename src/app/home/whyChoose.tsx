@@ -2,7 +2,7 @@ export default function WhyChoose(){
 
 return (
     <section className="w-full px-4 md:px-8 lg:px-12 py-12">
-      <div className="rounded-3xl bg-gradient-to-r from-black via-[#111111] to-black border border-orange-500/20 p-6 md:p-10 lg:p-12 shadow-2xl">
+      <div className="rounded-3xl bg-gradient-to-r from-black via-[#111111] to-black border border-brand/20 p-6 md:p-10 lg:p-12 shadow-2xl">
         <div className="space-y-6 text-white leading-8 text-[15px] md:text-lg">
           <p>
             Vishwakarma Welding Works provides trusted welding and fabrication
@@ -13,7 +13,7 @@ return (
           </p>
 
           <p>
-            <span className="bg-orange-500 text-black font-semibold px-2 py-1 rounded-sm">
+            <span className="bg-brand text-black font-semibold px-2 py-1 rounded-sm">
               Professional Welding & Fabrication
             </span>{" "}
             – We work on gates, grills, railings, staircases, sheds, shutters,
@@ -31,7 +31,7 @@ return (
           <p>
             Our team believes in combining practical design with lasting
             strength.{" "}
-            <span className="bg-orange-500 text-black font-semibold px-2 py-1 rounded-sm">
+            <span className="bg-brand text-black font-semibold px-2 py-1 rounded-sm">
               Custom Welding Solutions Made for Your Space
             </span>{" "}
             means every piece is designed exactly according to your

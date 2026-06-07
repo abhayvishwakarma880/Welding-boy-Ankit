@@ -44,7 +44,7 @@ export default function FounderSection() {
         }}
       />
       {/* Accent line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3.5px] bg-gradient-to-r from-transparent via-orange-500 to-transparent rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[3.5px] bg-gradient-to-r from-transparent via-brand to-transparent rounded-full" />
 
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
 
@@ -69,8 +69,8 @@ export default function FounderSection() {
               <p className="text-white/70 text-xs mt-1">Founder · Vishwakarma Welding</p>
             </div>
           </div>
-          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute -top-6 -right-6 w-24 h-24 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-brand/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand/10 rounded-full blur-2xl pointer-events-none" />
         </div>
 
         {/* Right — Introduction */}
@@ -83,18 +83,18 @@ export default function FounderSection() {
           }}
         >
           {/* Label */}
-          <div className="inline-flex items-center gap-2 w-fit px-3 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-            <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">Meet the Founder</span>
+          <div className="inline-flex items-center gap-2 w-fit px-3 py-1.5 bg-brand/5 border border-brand/20 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
+            <span className="text-xs font-bold text-brand uppercase tracking-wider">Meet the Founder</span>
           </div>
 
           {/* Name & Title */}
           <div>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
               Ankit{" "}
-              <span className="text-orange-500 relative">
+              <span className="text-brand relative">
                 Vishwakarma
-                <span className="absolute bottom-1 left-0 w-full h-[6px] bg-orange-200/50 -z-10 rounded-full" />
+                {/* <span className="absolute bottom-1 left-0 w-full h-[6px] bg-brand/20 -z-10 rounded-full" /> */}
               </span>
             </h2>
             <p className="mt-1 text-sm font-semibold text-slate-400 uppercase tracking-widest">
@@ -103,8 +103,8 @@ export default function FounderSection() {
           </div>
 
           {/* Quote */}
-          <div className="relative pl-5 border-l-4 border-orange-400">
-            <Quote className="absolute -top-1 -left-1 w-4 h-4 text-orange-300" />
+          <div className="relative pl-5 border-l-4 border-brand">
+            {/* <Quote className="absolute -top-1 -left-1 w-4 h-4 text-brand/40" /> */}
             <p className="text-sm md:text-base text-slate-600 leading-relaxed italic">
               "We don't just weld metal — we craft trust, durability, and precision into every project we touch. Every joint, every finish, every detail matters."
             </p>
@@ -119,8 +119,8 @@ export default function FounderSection() {
           <div className="flex flex-col gap-2.5">
             {highlights.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0">
-                  <Icon className="w-4 h-4 text-orange-500" />
+                <div className="w-8 h-8 rounded-lg bg-brand/5 border border-brand/10 flex items-center justify-center shrink-0">
+                  <Icon className="w-4 h-4 text-brand" />
                 </div>
                 <span className="text-sm font-medium text-slate-700">{label}</span>
               </div>
@@ -130,7 +130,7 @@ export default function FounderSection() {
           {/* Contact */}
           <Link
             href="tel:+917905940157"
-            className="inline-flex items-center gap-2.5 w-fit px-5 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm font-bold rounded-md shadow-md shadow-orange-500/20 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-orange-500/30"
+            className="inline-flex items-center gap-2.5 w-fit px-5 py-3 bg-brand text-white text-sm font-bold rounded-md shadow-md shadow-brand/20 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-brand/30"
           >
             <Phone className="w-4 h-4" />
             +91 79059 40157
