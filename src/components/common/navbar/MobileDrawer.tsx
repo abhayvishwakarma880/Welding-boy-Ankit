@@ -58,7 +58,7 @@ export default function MobileDrawer({ open, onClose }: Props) {
         className={`fixed top-0 left-0 h-full w-[80vw] max-w-[320px] bg-white z-[999] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${open ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-orange-500">
+        <div className="flex items-center justify-between px-4 py-3 bg-brand">
           <span className="text-white font-bold text-base">Menu</span>
           <button onClick={onClose} className="text-white p-1">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,13 +69,13 @@ export default function MobileDrawer({ open, onClose }: Props) {
 
         {/* Search */}
         <div className="px-4 py-3 border-b border-gray-100">
-          <div className="flex items-center border-2 border-orange-500 rounded-md overflow-hidden">
+          <div className="flex items-center border-2 border-brand rounded-md overflow-hidden">
             <input
               type="text"
               placeholder="Search products, services..."
               className="flex-1 px-3 py-2 text-sm text-gray-700 outline-none"
             />
-            <button className="bg-orange-500 text-white px-4 py-3">
+            <button className="bg-brand text-white px-4 py-3">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
               </svg>
@@ -88,13 +88,13 @@ export default function MobileDrawer({ open, onClose }: Props) {
 
           {/* Quick actions */}
           <div className="flex gap-2 px-4 py-3 border-b border-gray-100">
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 border border-orange-500 text-orange-500 rounded-lg text-sm font-semibold">
+            <button className="flex-1 flex items-center justify-center gap-2 py-2 border border-brand text-brand rounded-lg text-sm font-semibold">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
               Login
             </button>
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-orange-500 text-white rounded-lg text-sm font-semibold">
+            <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-brand text-white rounded-lg text-sm font-semibold">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
@@ -110,9 +110,9 @@ export default function MobileDrawer({ open, onClose }: Props) {
                 key={link.name}
                 href={link.path}
                 onClick={onClose}
-                className="flex items-center gap-3 py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500 border-b border-gray-50 last:border-0 transition"
+                className="flex items-center gap-3 py-2.5 text-sm font-medium text-gray-700 hover:text-brand border-b border-gray-50 last:border-0 transition"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
                 {link.name}
               </Link>
             ))}
@@ -125,7 +125,7 @@ export default function MobileDrawer({ open, onClose }: Props) {
               className="flex items-center justify-between w-full py-2.5 text-sm font-bold text-gray-700"
             >
               <span className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
                 All Categories
@@ -141,9 +141,9 @@ export default function MobileDrawer({ open, onClose }: Props) {
                   <button
                     key={cat}
                     onClick={onClose}
-                    className="flex items-center gap-2 px-3 py-2 text-xs text-gray-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition text-left"
+                    className="flex items-center gap-2 px-3 py-2 text-xs text-gray-600 hover:bg-brand/10 hover:text-brand rounded-lg transition text-left"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
                     {cat}
                   </button>
                 ))}
