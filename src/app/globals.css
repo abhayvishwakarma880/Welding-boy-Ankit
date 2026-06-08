@@ -5,11 +5,17 @@
   --foreground: #171717;
 
   /* ✅ Brand color — change here to update orange across entire website */
-  --color-brand: rgb(22, 48, 249);
+  /* --color-brand: rgb(22, 48, 249);
   --color-brand-hover: rgb(12, 35, 210);
 
   --color-brandBG-icon: rgba(216, 220, 248, 0.461);
-  --color-brand-shadow: rgb(87, 105, 243);
+  --color-brand-shadow: rgb(87, 105, 243); */
+
+  --color-brand: #0F766E;
+  --color-brand-hover: #115E59;
+
+  --color-brandBG-icon: rgba(15, 118, 110, 0.12);
+  --color-brand-shadow: rgba(15, 118, 110, 0.35);
 }
 
 @theme inline {
