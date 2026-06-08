@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { navLinks } from "./navLink";
 
 const categories = [
@@ -25,6 +26,7 @@ interface Props {
 
 export default function MobileDrawer({ open, onClose }: Props) {
   const [catOpen, setCatOpen] = useState(false);
+  const pathname = usePathname();
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -105,17 +107,24 @@ export default function MobileDrawer({ open, onClose }: Props) {
           {/* Nav Links */}
           <div className="px-4 py-2 border-b border-gray-100">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Pages</p>
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                onClick={onClose}
-                className="flex items-center gap-3 py-2.5 text-sm font-medium text-gray-700 hover:text-brand border-b border-gray-50 last:border-0 transition"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.path;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  onClick={onClose}
+                  className={`flex items-center gap-3 py-2.5 text-sm font-medium border-b border-gray-50 last:border-0 transition ${
+                    isActive ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"
+                  }`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                    isActive ? "bg-brand scale-125" : "bg-brand"
+                  }`} />
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Categories Accordion */}

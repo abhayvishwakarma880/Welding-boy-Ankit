@@ -1,7 +1,21 @@
-export default function Page() {
+import ServiceHero from "./ServiceHero";
+import ServiceIntro from "./ServiceIntro";
+import ServiceGrid from "./ServiceGrid";
+import ServiceProcess from "./ServiceProcess";
+import ServiceWhyChoose from "./ServiceWhyChoose";
+import ServiceCoverage from "./ServiceCoverage";
+import ServiceCTA from "./ServiceCTA";
+
+export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center text-5xl">
-      Services Page
-    </div>
+    <main>
+      <ServiceHero />
+      <ServiceIntro />
+      <ServiceGrid />
+      <ServiceProcess />
+      <ServiceWhyChoose />
+      <ServiceCoverage />
+      <ServiceCTA />
+    </main>
   );
 }

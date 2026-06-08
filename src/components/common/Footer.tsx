@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Phone, MapPin, Mail, Flame } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const quickLinks = [
   { name: "Home", path: "/" },
@@ -45,13 +46,19 @@ export default function Footer() {
           </p>
           {/* Social placeholder */}
           <div className="flex gap-2 mt-1">
-            {["FB", "IG", "WA"].map((s) => (
-              <span
-                key={s}
-                className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-400 hover:bg-brand hover:text-white hover:border-brand transition-all duration-300 cursor-pointer"
+            {[
+              { icon: <FaFacebookF className="w-3.5 h-3.5" />, href: "https://facebook.com" },
+              { icon: <FaInstagram className="w-3.5 h-3.5" />, href: "https://instagram.com" },
+              { icon: <FaWhatsapp className="w-3.5 h-3.5" />, href: "https://wa.me/917905940157" },
+            ].map((s, i) => (
+              <Link
+                key={i}
+                href={s.href}
+                target="_blank"
+                className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-brand hover:text-white hover:border-brand transition-all duration-300"
               >
-                {s}
-              </span>
+                {s.icon}
+              </Link>
             ))}
           </div>
         </div>

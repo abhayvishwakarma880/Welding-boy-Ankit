@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { navLinks } from "./navLink";
 import MobileDrawer from "./MobileDrawer";
 // import MobileDrawer from "./MobileDrawer";
@@ -25,6 +26,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
   const [catOpen, setCatOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -213,15 +215,25 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
 
                   {/* Nav Links */}
                   <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.path}
-                        className="shrink-0 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-brand transition whitespace-nowrap"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
+                    {navLinks.map((link) => {
+                      const isActive = pathname === link.path;
+                      return (
+                        <Link
+                          key={link.name}
+                          href={link.path}
+                          className={`relative shrink-0 px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap
+                            after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-brand after:rounded-full
+                            after:transition-transform after:duration-300 after:origin-left
+                            ${
+                              isActive
+                                ? "text-brand after:scale-x-100"
+                                : "text-gray-600 hover:text-brand after:scale-x-0 hover:after:scale-x-100"
+                            }`}
+                        >
+                          {link.name}
+                        </Link>
+                      );
+                    })}
                   </div>
 
                   {/* Search box - only when fixed */}
