@@ -1,22 +1,23 @@
-// import HeroSection from "./home/page";
-
-import HeroSlider from "./home/page";
-import ServiceSection from "./home/services";
-import PopularWorks from "./home/popularWork";
-import AboutSection from "./home/about";
-import Project from "./home/projects";
+import dynamic from "next/dynamic";
+import HeroSliderWrapper from "./home/HeroSliderWrapper";
 import WhyChoose from "./home/whyChoose";
-import Banner from "./home/banner";
-import RecentSideWork from "./home/recentSideWork";
-import CTABanner from "./home/ctaBanner";
-import LatestArticles from "./home/latestArticles";
-import FAQSection from "./home/faqSection";
-import FounderSection from "./home/founderSection";
+import ServiceSection from "./home/services";
+
+// Below-fold sections — lazy loaded for faster initial load
+const AboutSection    = dynamic(() => import("./home/about"));
+const Project         = dynamic(() => import("./home/projects"));
+const Banner          = dynamic(() => import("./home/banner"));
+const PopularWorks    = dynamic(() => import("./home/popularWork"));
+const RecentSideWork  = dynamic(() => import("./home/recentSideWork"));
+const CTABanner       = dynamic(() => import("./home/ctaBanner"));
+const LatestArticles  = dynamic(() => import("./home/latestArticles"));
+const FounderSection  = dynamic(() => import("./home/founderSection"));
+const FAQSection      = dynamic(() => import("./home/faqSection"));
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <HeroSlider />
+      <HeroSliderWrapper />
       <WhyChoose />
       <ServiceSection />
       <AboutSection />
