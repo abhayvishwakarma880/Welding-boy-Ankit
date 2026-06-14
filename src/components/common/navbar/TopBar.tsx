@@ -1,8 +1,47 @@
 "use client";
 import { useState, useEffect } from "react";
 
+// Google Translate ke liye global type
+declare global {
+  interface Window {
+    google: {
+      translate: {
+        TranslateElement: new (
+          options: object,
+          element: string
+        ) => void;
+      };
+    };
+    googleTranslateElementInit: () => void;
+  }
+}
+
 export default function TopBar() {
-  const [lang, setLang] = useState("EN");
+  const [lang, setLang] = useState<"EN" | "HI">("EN");
+
+  const switchLanguage = (targetLang: "EN" | "HI") => {
+    if (targetLang === lang) return;
+    setLang(targetLang);
+
+    // Google Translate cookie set karke page translate hoga
+    const langCode = targetLang === "HI" ? "hi" : "en";
+
+    // Existing googtrans cookie remove karo
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = `googtrans=/en/${langCode}; path=/`;
+
+    // Widget ke andar select element dhundh ke trigger karo
+    const tryTranslate = () => {
+      const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
+      if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event("change"));
+      } else {
+        setTimeout(tryTranslate, 300);
+      }
+    };
+    tryTranslate();
+  };
   const [flash, setFlash] = useState(false);
   const [alert, setAlert] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -113,14 +152,26 @@ export default function TopBar() {
             Create Order
           </button>
 
-          {/* Language - always visible */}
-          <button
-            onClick={() => setLang(lang === "EN" ? "HI" : "EN")}
-            className={btnClass}
-          >
-            🌐 <span className="hidden sm:inline">{lang === "EN" ? "English" : "हिंदी"}</span>
-            <span className="sm:hidden">{lang}</span>
-          </button>
+          {/* Language Toggle */}
+          <div className="flex items-center gap-0.5 border border-white/30 rounded overflow-hidden">
+            <button
+              onClick={() => switchLanguage("EN")}
+              className={`px-2.5 py-1.5 text-xs font-bold transition-all duration-200 ${
+                lang === "EN" ? "bg-white text-brand" : "text-white hover:bg-white/10"
+              }`}
+            >
+              EN
+            </button>
+            <span className="text-white/30 text-xs">|</span>
+            <button
+              onClick={() => switchLanguage("HI")}
+              className={`px-2.5 py-1.5 text-xs font-bold transition-all duration-200 ${
+                lang === "HI" ? "bg-white text-brand" : "text-white hover:bg-white/10"
+              }`}
+            >
+              हि
+            </button>
+          </div>
         </div>
 
       </div>

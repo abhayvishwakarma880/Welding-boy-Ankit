@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "../components/common/navbar";
 import Footer from "../components/common/Footer";
@@ -23,6 +24,22 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} antialiased`}>
       <body style={{ fontFamily: "var(--font-outfit), Outfit, sans-serif" }}>
+        {/* Google Translate — hidden default widget */}
+        <div id="google_translate_element" style={{ display: "none" }} />
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                { pageLanguage: 'en', includedLanguages: 'en,hi', autoDisplay: false },
+                'google_translate_element'
+              );
+            }
+          `}
+        </Script>
         <Navbar />
         {children}
         <Footer />
