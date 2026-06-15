@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
-import HeroSlider from "@/src/components/common/HeroSlider";
+import HeroSlider from "@/components/common/HeroSlider";
 
 const slides = [
   {

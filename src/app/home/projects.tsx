@@ -1,79 +1,25 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { getProducts } from "@/apis/products";
 
-const projects = [
-  {
-    id: 1,
-    title: "Steel Main Gate",
-    location: "Lucknow, UP",
-    category: "Residential",
-    status: "Completed",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&q=80",
-    color: "var(--color-brand)",
-  },
-  {
-    id: 2,
-    title: "Balcony Railing",
-    location: "Kanpur, UP",
-    category: "Residential",
-    status: "Completed",
-    image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&q=80",
-    color: "var(--color-brand)",
-  },
-  {
-    id: 3,
-    title: "Industrial Shed",
-    location: "Noida, UP",
-    category: "Industrial",
-    status: "Completed",
-    image:
-      "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400&h=300&fit=crop&q=80",
-    color: "var(--color-brand)",
-  },
-  {
-    id: 4,
-    title: "Window Grill",
-    location: "Agra, UP",
-    category: "Custom Work",
-    status: "Completed",
-    image:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&q=80",
-    color: "var(--color-brand)",
-  },
-  {
-    id: 5,
-    title: "Modern Staircase",
-    location: "Varanasi, UP",
-    category: "Residential",
-    status: "Completed",
-    image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop&q=80",
-    color: "var(--color-brand)",
-  },
-  {
-    id: 6,
-    title: "MS Structure",
-    location: "Lucknow, UP",
-    category: "Industrial",
-    status: "Completed",
-    image:
-      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop&q=80",
-    color: "var(--color-brand)",
-  },
-];
-
-const categoryColors: Record<string, string> = {
-  Residential: "var(--color-brand)",
-  Industrial: "var(--color-brand)",
-  "Custom Work": "var(--color-brand)",
-};
+interface Product {
+  _id: string;
+  name: string;
+  mainImage: { url: string };
+  category?: { _id: string; name: string };
+}
 
 export default function Project() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [projects, setProjects] = useState<Product[]>([]);
+
+  useEffect(() => {
+    getProducts({ limit: 5 })
+      .then((res) => setProjects(res.data || []))
+      .catch(() => {});
+  }, []);
 
   const handleScroll = () => {
     const el = scrollRef.current;
@@ -103,32 +49,25 @@ export default function Project() {
       >
         {projects.map((p, i) => (
           <div
-            key={p.id}
+            key={p._id}
             className="flex-none w-[260px] h-[340px] rounded-[20px] overflow-hidden relative snap-center cursor-pointer transition-transform duration-200 ease-out hover:shadow-xl active:scale-[0.97] shadow-md"
           >
             <img
-              src={p.image}
-              alt={p.title}
+              src={p.mainImage?.url}
+              alt={p.name}
               loading="lazy"
               className="w-full h-full object-cover block transition-transform duration-400 ease-out hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/45 to-black/85" />
             <div className="absolute bottom-0 left-0 right-0 p-[14px_16px_16px]">
-              <span className="inline-block px-[10px] py-[3px] rounded-[20px] text-[10px] font-semibold tracking-[0.6px] uppercase bg-brand text-white mb-[7px]">
-                {p.category}
-              </span>
+              {p.category?.name && (
+                <span className="inline-block px-[10px] py-[3px] rounded-[20px] text-[10px] font-semibold tracking-[0.6px] uppercase bg-brand text-white mb-[7px]">
+                  {p.category.name}
+                </span>
+              )}
               <h3 className="font-['Oswald',sans-serif] text-[18px] font-semibold text-white leading-[1.2] m-0 mb-1 tracking-[0.3px]">
-                {p.title}
+                {p.name}
               </h3>
-              <div className="flex items-center gap-2">
-                <span className="font-['Barlow',sans-serif] text-xs text-white/75 tracking-[0.2px]">
-                  📍 {p.location}
-                </span>
-                <span className="w-[3px] h-[3px] bg-white/40 rounded-full" />
-                <span className="text-[11px] text-green-400 font-medium font-['Barlow',sans-serif]">
-                  ✓ {p.status}
-                </span>
-              </div>
             </div>
           </div>
         ))}

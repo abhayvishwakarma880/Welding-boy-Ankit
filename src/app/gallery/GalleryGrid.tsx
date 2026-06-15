@@ -2,20 +2,75 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import { galleryCategories, galleryItems } from "./galleryData";
+import { getGallery } from "@/apis/gallery";
+
+interface GalleryItem {
+  _id: string;
+  title: string;
+  description: string;
+  image: { url: string };
+  category: { _id: string; name: string } | null;
+}
+
+function SkeletonCard() {
+  return (
+    <div className="bg-white border border-slate-200/70 rounded-xl overflow-hidden animate-pulse">
+      <div className="w-full h-44 bg-slate-200" />
+      <div className="p-3 flex flex-col gap-2">
+        <div className="h-2.5 w-16 bg-slate-200 rounded-full" />
+        <div className="h-3 w-full bg-slate-200 rounded-full" />
+        <div className="h-3 w-2/3 bg-slate-200 rounded-full" />
+      </div>
+    </div>
+  );
+}
 
 export default function GalleryGrid() {
+  const [items, setItems] = useState<GalleryItem[]>([]);
+  const [categories, setCategories] = useState<string[]>(["All"]);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
   const touchStartX = useRef<number | null>(null);
+
+  const fetchGallery = useCallback(async (pg: number, reset = false) => {
+    try {
+      setLoading(true);
+      const res = await getGallery({ page: pg, limit: 20 });
+      const data: GalleryItem[] = res.data || [];
+
+      if (reset) {
+        setItems(data);
+      } else {
+        setItems((prev) => [...prev, ...data]);
+      }
+
+      setTotalPages(res.pagination?.totalPages || 1);
+
+      // derive unique categories from all fetched items (only on first load)
+      if (reset) {
+        const cats = Array.from(
+          new Set(data.map((i) => i.category?.name).filter(Boolean))
+        ) as string[];
+        setCategories(["All", ...cats]);
+      }
+    } catch {
+      setItems([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchGallery(1, true);
+  }, [fetchGallery]);
 
   const filtered =
     activeCategory === "All"
-      ? galleryItems
-      : activeCategory === "Recent Projects"
-      ? galleryItems.filter((item) => item.recent)
-      : galleryItems.filter((item) => item.category === activeCategory);
+      ? items
+      : items.filter((item) => item.category?.name === activeCategory);
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -30,7 +85,6 @@ export default function GalleryGrid() {
     setLightboxIndex((lightboxIndex + 1) % filtered.length);
   }, [lightboxIndex, filtered.length]);
 
-  // Keyboard navigation
   useEffect(() => {
     if (lightboxIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -42,13 +96,11 @@ export default function GalleryGrid() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightboxIndex, next, prev]);
 
-  // Body scroll lock
   useEffect(() => {
     document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [lightboxIndex]);
 
-  // Touch swipe
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -76,7 +128,7 @@ export default function GalleryGrid() {
 
         {/* Category Filter */}
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 mb-8">
-          {galleryCategories.map((cat) => (
+          {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
@@ -91,39 +143,60 @@ export default function GalleryGrid() {
           ))}
         </div>
 
-        <p className="text-xs text-slate-400 font-medium mb-5">{filtered.length} projects</p>
+        {!loading && <p className="text-xs text-slate-400 font-medium mb-5">{filtered.length} projects</p>}
 
         {/* Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {filtered.map((item, index) => (
-            <div
-              key={item.id}
-              className="bg-white border border-slate-200/70 rounded-xl overflow-hidden shadow-sm cursor-pointer group"
-              onClick={() => openLightbox(index)}
-            >
-              <div className="relative w-full h-44 overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  unoptimized
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
-                  </svg>
+        {loading && page === 1 ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-16 text-slate-400 text-sm">
+            Is category mein abhi koi project nahi hai.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {filtered.map((item, index) => (
+              <div
+                key={item._id}
+                className="bg-white border border-slate-200/70 rounded-xl overflow-hidden shadow-sm cursor-pointer group"
+                onClick={() => openLightbox(index)}
+              >
+                <div className="relative w-full h-44 overflow-hidden">
+                  <Image
+                    src={item.image?.url}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    unoptimized
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="p-3 flex flex-col gap-1.5">
+                  <p className="text-[10px] font-bold text-brand uppercase tracking-widest">{item.category?.name}</p>
+                  <h3 className="text-xs font-bold text-slate-800 leading-snug">{item.title}</h3>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">{item.description}</p>
                 </div>
               </div>
-              <div className="p-3 flex flex-col gap-1.5">
-                <p className="text-[10px] font-bold text-brand uppercase tracking-widest">{item.category}</p>
-                <h3 className="text-xs font-bold text-slate-800 leading-snug">{item.title}</h3>
-                <p className="text-[11px] text-slate-500 leading-relaxed">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+
+        {/* Load More */}
+        {!loading && page < totalPages && activeCategory === "All" && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => { const next = page + 1; setPage(next); fetchGallery(next, false); }}
+              className="px-6 py-2.5 rounded-full border border-brand text-brand text-sm font-semibold hover:bg-brand hover:!text-white transition-all duration-300"
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -133,7 +206,6 @@ export default function GalleryGrid() {
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {/* Close button */}
           <button
             onClick={closeLightbox}
             className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition"
@@ -143,12 +215,10 @@ export default function GalleryGrid() {
             </svg>
           </button>
 
-          {/* Counter */}
           <div className="absolute top-4 left-4 z-10 text-white/60 text-sm font-medium">
             {lightboxIndex + 1} / {filtered.length}
           </div>
 
-          {/* Prev button */}
           <button
             onClick={prev}
             className="absolute left-3 z-10 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition"
@@ -158,10 +228,9 @@ export default function GalleryGrid() {
             </svg>
           </button>
 
-          {/* Image */}
           <div className="relative w-full h-full max-w-4xl max-h-[80vh] mx-16">
             <Image
-              src={filtered[lightboxIndex].image}
+              src={filtered[lightboxIndex].image?.url}
               alt={filtered[lightboxIndex].title}
               fill
               className="object-contain"
@@ -169,7 +238,6 @@ export default function GalleryGrid() {
             />
           </div>
 
-          {/* Next button */}
           <button
             onClick={next}
             className="absolute right-3 z-10 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition"
@@ -179,13 +247,11 @@ export default function GalleryGrid() {
             </svg>
           </button>
 
-          {/* Bottom info */}
           <div className="absolute bottom-6 left-0 right-0 text-center px-4">
             <p className="text-white font-semibold text-sm">{filtered[lightboxIndex].title}</p>
-            <p className="text-white/50 text-xs mt-1">{filtered[lightboxIndex].category}</p>
+            <p className="text-white/50 text-xs mt-1">{filtered[lightboxIndex].category?.name}</p>
           </div>
 
-          {/* Dot indicators */}
           <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-1.5">
             {filtered.map((_, i) => (
               <button

@@ -3,21 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { navLinks } from "./navLink";
-
-const categories = [
-  "Welding Work",
-  "Steel Railing",
-  "Iron Gate",
-  "Window Grill",
-  "Aluminium Gate",
-  "Fabrication",
-  "Cutting & Grinding",
-  "Safety Gear",
-  "Custom Orders",
-  "MS Structure",
-  "Staircase Railing",
-  "Gate Automation",
-];
+import useCategoryStore from "@/store/useCategoryStore";
 
 interface Props {
   open: boolean;
@@ -27,6 +13,7 @@ interface Props {
 export default function MobileDrawer({ open, onClose }: Props) {
   const [catOpen, setCatOpen] = useState(false);
   const pathname = usePathname();
+  const { categories } = useCategoryStore();
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -147,14 +134,15 @@ export default function MobileDrawer({ open, onClose }: Props) {
             <div className={`overflow-hidden transition-all duration-300 ${catOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
               <div className="grid grid-cols-2 gap-1 pb-3">
                 {categories.map((cat) => (
-                  <button
-                    key={cat}
+                  <Link
+                    key={cat._id}
+                    href={`/products?category=${cat._id}`}
                     onClick={onClose}
                     className="flex items-center gap-2 px-3 py-2 text-xs text-gray-600 hover:bg-brand/10 hover:text-brand rounded-lg transition text-left"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
-                    {cat}
-                  </button>
+                    {cat.name}
+                  </Link>
                 ))}
               </div>
             </div>

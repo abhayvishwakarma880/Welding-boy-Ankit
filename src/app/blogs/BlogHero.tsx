@@ -1,4 +1,16 @@
-export default function BlogHero() {
+"use client";
+
+import { useState } from "react";
+
+type Props = {
+  onSearch: (query: string) => void;
+};
+
+export default function BlogHero({ onSearch }: Props) {
+  const [value, setValue] = useState("");
+
+  const handleSearch = () => onSearch(value.trim());
+
   return (
     <section className="bg-white pt-10 pb-8 px-4 text-center border-b border-gray-100">
       <span className="inline-flex items-center gap-1.5 bg-brandBG-icon border border-brand rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-brand uppercase mb-3">
@@ -15,10 +27,16 @@ export default function BlogHero() {
       <div className="mt-6 max-w-md mx-auto flex items-center border-2 border-brand rounded-xl overflow-hidden">
         <input
           type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           placeholder="Search articles..."
           className="flex-1 px-4 py-3 text-sm text-zinc-700 outline-none bg-white"
         />
-        <button className="bg-brand text-white px-5 py-3 text-sm font-semibold transition hover:bg-brand-hover shrink-0">
+        <button
+          onClick={handleSearch}
+          className="bg-brand text-white px-5 py-3 text-sm font-semibold transition hover:bg-brand-hover shrink-0"
+        >
           Search
         </button>
       </div>

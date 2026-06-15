@@ -1,6 +1,6 @@
 "use client";
 
-import { categories } from "./blogData";
+import useCategoryStore from "@/store/useCategoryStore";
 
 type Props = {
   active: string;
@@ -8,11 +8,15 @@ type Props = {
 };
 
 export default function BlogCategories({ active, onChange }: Props) {
+  const { categories } = useCategoryStore();
+
+  const allCategories = ["All", ...categories.map((c) => c.name)];
+
   return (
     <section className="bg-white py-5 px-4 border-b border-zinc-100 sticky top-0 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1">
-          {categories.map((cat) => (
+          {allCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => onChange(cat)}

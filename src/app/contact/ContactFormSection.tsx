@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendContact } from "@/apis/contact";
 
 const services = [
   "Steel Welding",
@@ -29,14 +30,35 @@ export default function ContactFormSection() {
     location: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // handle form submission
+    setLoading(true);
+    setError("");
+    setSuccess(false);
+    try {
+      await sendContact({
+        name: form.name,
+        mobile: form.phone,
+        email: form.email,
+        service: form.service,
+        projectLocation: form.location,
+        message: form.message,
+      });
+      setSuccess(true);
+      setForm({ name: "", phone: "", email: "", service: "", location: "", message: "" });
+    } catch (err: any) {
+      setError(err?.response?.data?.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -138,11 +160,22 @@ export default function ContactFormSection() {
               />
             </div>
 
+            {success && (
+              <div className="w-full px-4 py-3 bg-green-50 border border-green-200 rounded-xl text-sm text-green-700 font-medium text-center">
+                ✅ Request submit ho gayi! Hum jald aapse contact karenge.
+              </div>
+            )}
+            {error && (
+              <div className="w-full px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 font-medium text-center">
+                {error}
+              </div>
+            )}
             <button
               type="submit"
-              className="w-full py-3 bg-brand text-white font-bold text-sm rounded-xl transition hover:bg-brand-hover active:scale-95"
+              disabled={loading}
+              className="w-full py-3 bg-brand text-white font-bold text-sm rounded-xl transition hover:bg-brand-hover active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Get Free Quote
+              {loading ? "Submitting..." : "Get Free Quote"}
             </button>
           </form>
         </div>

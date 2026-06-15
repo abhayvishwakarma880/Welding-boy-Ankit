@@ -3,71 +3,39 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight, CalendarDays } from "lucide-react";
 import Link from "next/link";
+import { getBlogs } from "@/apis/blogs";
 
-interface Article {
-  id: number;
+interface Blog {
+  _id: string;
   title: string;
   description: string;
-  image: string;
-  date: string;
+  image: { url: string };
+  slug: string;
+  createdAt: string;
+  readTime: number;
 }
 
-const articlesData: Article[] = [
-  {
-    id: 1,
-    title: "How to Choose the Right Metal for Your Gate",
-    description: "A complete guide to selecting between wrought iron, mild steel, and stainless steel for residential gates.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&q=80",
-    date: "June 12, 2025",
-  },
-  {
-    id: 2,
-    title: "Top 5 Welding Techniques for Strong Fabrication",
-    description: "Explore the most reliable welding methods used in heavy-duty structural and decorative metalwork.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop&q=80",
-    date: "May 28, 2025",
-  },
-  {
-    id: 3,
-    title: "Why Powder Coating Outperforms Regular Paint",
-    description: "Understand the durability, finish quality, and cost benefits of powder coating over traditional painting.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&q=80",
-    date: "May 10, 2025",
-  },
-  {
-    id: 4,
-    title: "Safety Tips for Installing Window Grills",
-    description: "Key considerations for properly installing window grills to ensure safety without compromising aesthetics.",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop&q=80",
-    date: "April 22, 2025",
-  },
-  {
-    id: 5,
-    title: "Modern Railing Design Trends in 2025",
-    description: "Discover the latest trends in balcony and staircase railings — from minimalist steel to glass-steel combos.",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=400&fit=crop&q=80",
-    date: "April 5, 2025",
-  },
-  {
-    id: 6,
-    title: "Maintaining Iron Furniture for Longevity",
-    description: "Simple maintenance routines to keep your iron garden furniture rust-free and looking great year-round.",
-    image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=400&fit=crop&q=80",
-    date: "March 18, 2025",
-  },
-];
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
 
 export default function LatestArticles() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
+  const [articles, setArticles] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
-
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeftVal = useRef(0);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    getBlogs({ limit: 6 })
+      .then((res) => setArticles(res.data || []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = scrollContainerRef.current;
@@ -159,7 +127,7 @@ export default function LatestArticles() {
     return () => {
       if (el) el.removeEventListener("scroll", checkScrollStatus);
     };
-  }, []);
+  }, [articles]);
 
   const handleScroll = (direction: "left" | "right") => {
     const el = scrollContainerRef.current;
@@ -196,6 +164,13 @@ export default function LatestArticles() {
           <p className="mt-3 text-sm md:text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
             Tips, guides, and insights from our fabrication and welding experts.
           </p>
+          <Link
+            href="/blogs"
+            className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-full border border-brand text-brand text-sm font-semibold transition-all duration-300 group hover:bg-brand"
+          >
+            <span className="group-hover:text-white transition-colors duration-300">View All Blogs</span>
+            <ArrowRight className="w-4 h-4 group-hover:text-white transition-colors duration-300" />
+          </Link>
         </div>
 
         {/* Slider Area */}
@@ -239,56 +214,77 @@ export default function LatestArticles() {
               scrollBehavior: "smooth",
             }}
           >
-            {articlesData.map((article) => (
-              <div
-                key={article.id}
-                className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center group/card transition-all duration-300 hover:shadow-2xl hover:shadow-brand/5 hover:border-brand/30 hover:-translate-y-1.5 flex flex-col justify-between"
-              >
-                {/* Image */}
-                <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden shrink-0">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                </div>
-
-                {/* Content */}
-                <div className="p-5 flex flex-col flex-grow">
-                  {/* Date */}
-                  <div className="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 mb-2">
-                    <CalendarDays className="w-3 h-3" />
-                    <span>{article.date}</span>
+            {loading
+              ? Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center flex flex-col animate-pulse">
+                    <div className="aspect-[4/3] w-full bg-slate-200" />
+                    <div className="p-5 flex flex-col gap-3">
+                      <div className="h-3 w-24 bg-slate-200 rounded-full" />
+                      <div className="h-4 w-full bg-slate-200 rounded-full" />
+                      <div className="h-4 w-3/4 bg-slate-200 rounded-full" />
+                      <div className="h-3 w-full bg-slate-200 rounded-full" />
+                      <div className="h-3 w-2/3 bg-slate-200 rounded-full" />
+                      <div className="h-[1px] bg-slate-100 my-1" />
+                      <div className="h-9 w-full bg-slate-200 rounded-md" />
+                    </div>
                   </div>
-
-                  <h3 className="text-base md:text-lg font-bold text-slate-800 line-clamp-2 group-hover/card:text-brand transition-colors duration-200">
-                    {article.title}
-                  </h3>
-
-                  <p className="mt-1.5 text-xs text-slate-400 line-clamp-2 leading-relaxed flex-grow">
-                    {article.description}
-                  </p>
-
-                  <div className="h-[1px] bg-slate-100 my-4" />
-
-                  <Link
-                    href="/blog"
-                    onClick={handleLinkClick}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:shadow-lg hover:shadow-brand/30"
+                ))
+              : articles.map((article) => (
+                  <div
+                    key={article._id}
+                    className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center group/card transition-all duration-300 hover:shadow-2xl hover:shadow-brand/5 hover:border-brand/30 hover:-translate-y-1.5 flex flex-col justify-between"
                   >
-                    <span>Read Article</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ))}
+                    <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden shrink-0">
+                      <img
+                        src={article.image?.url}
+                        alt={article.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+                    </div>
+
+                    <div className="p-5 flex flex-col flex-grow">
+                      <div className="flex items-center gap-3 text-[10px] font-semibold text-slate-400 mb-2">
+                        <div className="flex items-center gap-1.5">
+                          <CalendarDays className="w-3 h-3" />
+                          <span>{fmtDate(article.createdAt)}</span>
+                        </div>
+                        {article.readTime && (
+                          <div className="flex items-center gap-1.5">
+                            <span>•</span>
+                            <span>{article.readTime} min read</span>
+                          </div>
+                        )}
+                      </div>
+
+                      <h3 className="text-base md:text-lg font-bold text-slate-800 line-clamp-2 group-hover/card:text-brand transition-colors duration-200">
+                        {article.title}
+                      </h3>
+
+                      <p
+                        className="mt-1.5 text-xs text-slate-400 line-clamp-2 leading-relaxed flex-grow"
+                        dangerouslySetInnerHTML={{ __html: article.description }}
+                      />
+
+                      <div className="h-[1px] bg-slate-100 my-4" />
+
+                      <Link
+                        href={`/blog/${article.slug || article._id}`}
+                        onClick={handleLinkClick}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:shadow-lg hover:shadow-brand/30"
+                      >
+                        <span>Read Article</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+                ))}
           </div>
 
           {/* Dot Indicators */}
           <div className="flex justify-center gap-2 mt-4">
-            {articlesData.map((_, i) => (
+            {articles.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {

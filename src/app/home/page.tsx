@@ -1,27 +1,32 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
-
-const images = [
-  "/images/sliders/01.png",
-  "/images/sliders/02.png",
-  "/images/sliders/03.png",
-];
+import { getSliders } from "@/apis/sliders";
 
 export default function HeroSlider() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const uniformsRef = useRef<{
-    texture1: { value: THREE.Texture };
-    texture2: { value: THREE.Texture };
-    progress: { value: number };
-    screenSize: { value: THREE.Vector2 };
-  } | null>(null);
+  const [images, setImages] = useState<string[]>([]);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!mountRef.current) return;
+    getSliders()
+      .then((res) => {
+        const urls = (res.data || [])
+          .filter((s: { isActive: boolean }) => s.isActive)
+          .map((s: { image: { url: string } }) => s.image.url);
+        setImages(urls.length ? urls : ["/images/banner/bannerOne.png", "/images/banner/bannerTwo.png", "/images/banner/hero.png"]);
+        setReady(true);
+      })
+      .catch(() => {
+        setImages(["/images/banner/bannerOne.png", "/images/banner/bannerTwo.png", "/images/banner/hero.png"]);
+        setReady(true);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!ready || images.length === 0 || !mountRef.current) return;
 
     let currentIndex = 0;
 
@@ -30,7 +35,6 @@ export default function HeroSlider() {
     camera.position.z = 1;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    rendererRef.current = renderer;
 
     const getSize = () => ({
       width: mountRef.current!.clientWidth,
@@ -43,7 +47,11 @@ export default function HeroSlider() {
     mountRef.current.appendChild(renderer.domElement);
 
     const loader = new THREE.TextureLoader();
-    const textures = images.map((img) => loader.load(img));
+    const textures = images.map((img) => {
+      const t = loader.load(img);
+      t.crossOrigin = "anonymous";
+      return t;
+    });
 
     const uniforms = {
       texture1: { value: textures[0] },
@@ -51,7 +59,6 @@ export default function HeroSlider() {
       progress: { value: 0 },
       screenSize: { value: new THREE.Vector2(width, height) },
     };
-    uniformsRef.current = uniforms;
 
     const material = new THREE.ShaderMaterial({
       uniforms,
@@ -171,13 +178,11 @@ export default function HeroSlider() {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [ready, images]);
 
   return (
     <section className="relative w-full h-[200px] md:h-screen overflow-hidden">
       <div ref={mountRef} className="absolute inset-0 w-full h-full" />
-      {/* Overlay */}
-      {/* <div className="absolute inset-0 bg-black/40" /> */}
     </section>
   );
 }

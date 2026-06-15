@@ -3,56 +3,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { getProducts } from "@/apis/products";
 
-interface SideWork {
-  id: number;
-  title: string;
+interface Product {
+  _id: string;
+  name: string;
   description: string;
-  image: string;
+  mainImage: { url: string };
 }
-
-const sideWorksData: SideWork[] = [
-  {
-    id: 1,
-    title: "Premium Ornamental Gate",
-    description: "Elegant, high-durability wrought iron gate with anti-rust coating.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&q=80",
-  },
-  {
-    id: 2,
-    title: "Modern Safety Window Grill",
-    description: "Heavy-duty safety window grill with premium geometric patterns.",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop&q=80",
-  },
-  {
-    id: 3,
-    title: "Classic Garden Bench",
-    description: "Vintage-style powder-coated iron bench for premium outdoor seating.",
-    image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=400&fit=crop&q=80",
-  },
-  {
-    id: 4,
-    title: "Designer Balcony Railing",
-    description: "Sophisticated wrought iron balcony railing for luxurious residential projects.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop&q=80",
-  },
-  {
-    id: 5,
-    title: "Stainless Steel Glass Railing",
-    description: "Sleek and minimalist 304-grade steel railing with tempered glass panels.",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=400&fit=crop&q=80",
-  },
-  {
-    id: 6,
-    title: "Steel Wooden-Finish Gate",
-    description: "Ultra-modern steel entrance gate featuring premium walnut-finish metal panels.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&q=80",
-  },
-];
 
 export default function RecentSideWork() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  
+  const [products, setProducts] = useState<Product[]>([]);
+
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
@@ -170,6 +133,12 @@ export default function RecentSideWork() {
   };
 
   useEffect(() => {
+    getProducts({ limit: 5 })
+      .then((res) => setProducts(res.data || []))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     const el = scrollContainerRef.current;
     if (el) {
       el.addEventListener("scroll", checkScrollStatus);
@@ -178,7 +147,7 @@ export default function RecentSideWork() {
     return () => {
       if (el) el.removeEventListener("scroll", checkScrollStatus);
     };
-  }, []);
+  }, [products]);
 
   const handleScroll = (direction: "left" | "right") => {
     const el = scrollContainerRef.current;
@@ -263,43 +232,40 @@ export default function RecentSideWork() {
               scrollBehavior: "smooth",
             }}
           >
-            {sideWorksData.map((work) => (
+            {products.map((product) => (
               <div
-                key={work.id}
+                key={product._id}
                 className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center group/card transition-all duration-300 hover:shadow-2xl hover:shadow-brand/5 hover:border-brand/30 hover:-translate-y-1.5 flex flex-col justify-between"
               >
                 {/* Work Image Area */}
                 <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden shrink-0">
                   <img
-                    src={work.image}
-                    alt={work.title}
+                    src={product.mainImage?.url}
+                    alt={product.name}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-110"
                   />
-                  
-                  {/* Overlay Gradient on Image */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Card Content */}
                 <div className="p-5 flex flex-col flex-grow">
                   <h3 className="text-base md:text-lg font-bold text-slate-800 line-clamp-1 group-hover/card:text-brand transition-colors duration-200">
-                    {work.title}
+                    {product.name}
                   </h3>
 
                   <p className="mt-1.5 text-xs text-slate-400 line-clamp-2 leading-relaxed flex-grow">
-                    {work.description}
+                    {product.description || ""}
                   </p>
 
                   <div className="h-[1px] bg-slate-100 my-4" />
 
-                  {/* Action Button */}
                   <Link
-                    href="/contact"
+                    href={`/product/${product._id}`}
                     onClick={handleLinkClick}
                     className="inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:shadow-lg hover:shadow-brand/30"
                   >
-                    <span>View Project</span>
+                    <span>View Product</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
@@ -309,7 +275,7 @@ export default function RecentSideWork() {
 
           {/* Bottom Indicators */}
           <div className="flex justify-center gap-2 mt-4">
-            {sideWorksData.map((_, i) => (
+            {products.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {

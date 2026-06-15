@@ -5,28 +5,14 @@ import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { navLinks } from "./navLink";
 import MobileDrawer from "./MobileDrawer";
-// import MobileDrawer from "./MobileDrawer";
-
-const categories = [
-  "Welding Work",
-  "Steel Railing",
-  "Iron Gate",
-  "Window Grill",
-  "Aluminium Gate",
-  "Fabrication",
-  "Cutting & Grinding",
-  "Safety Gear",
-  "Custom Orders",
-  "MS Structure",
-  "Staircase Railing",
-  "Gate Automation",
-];
+import useCategoryStore from "@/store/useCategoryStore";
 
 export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
   const [catOpen, setCatOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const { categories } = useCategoryStore();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -198,14 +184,15 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-1">Browse Categories</p>
                       <div className="grid grid-cols-3 gap-1">
                         {categories.map((cat) => (
-                          <button
-                            key={cat}
+                          <Link
+                            key={cat._id}
+                            href={`/products?category=${cat._id}`}
                             onClick={() => setCatOpen(false)}
                             className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-brand hover:text-white rounded-lg transition text-left cursor-pointer"
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
-                            {cat}
-                          </button>
+                            {cat.name}
+                          </Link>
                         ))}
                       </div>
                     </div>

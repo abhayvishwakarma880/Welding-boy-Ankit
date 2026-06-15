@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "../components/common/navbar";
 import Footer from "../components/common/Footer";
+import AppInitializer from "../components/common/AppInitializer";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -74,6 +75,7 @@ export default function RootLayout({
             }
           `}
         </Script>
+        <AppInitializer />
         <Navbar />
         {children}
         <Footer />

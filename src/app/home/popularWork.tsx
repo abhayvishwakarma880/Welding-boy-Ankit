@@ -1,160 +1,57 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Hammer, Shield, Layers, ChevronLeft, ChevronRight, ArrowRight, Tag, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight, Tag, Heart } from "lucide-react";
 import Link from "next/link";
+import { getProducts } from "@/apis/products";
+import useCategoryStore from "@/store/useCategoryStore";
 
 interface Product {
-  id: number;
-  title: string;
-  category: "Iron" | "Steel" | "Aluminium";
-  price: string;
+  _id: string;
+  name: string;
   description: string;
-  image: string;
-  tag: string;
+  price: number;
+  discount: number;
+  mainImage: { url: string };
+  category: { _id: string; name: string };
 }
 
-const productsData: Product[] = [
-  // --- IRON PRODUCTS ---
-  {
-    id: 1,
-    title: "Premium Ornamental Gate",
-    category: "Iron",
-    price: "₹45,000",
-    description: "Elegant, high-durability wrought iron gate with anti-rust coating.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop&q=80",
-    tag: "Best Seller",
-  },
-  {
-    id: 2,
-    title: "Modern Safety Window Grill",
-    category: "Iron",
-    price: "₹8,500",
-    description: "Heavy-duty safety window grill with premium geometric patterns.",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=800&fit=crop&q=80",
-    tag: "High Security",
-  },
-  {
-    id: 3,
-    title: "Classic Garden Bench",
-    category: "Iron",
-    price: "₹12,000",
-    description: "Vintage-style powder-coated iron bench for premium outdoor seating.",
-    image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=800&fit=crop&q=80",
-    tag: "Trending",
-  },
-  {
-    id: 4,
-    title: "Designer Balcony Railing",
-    category: "Iron",
-    price: "₹15,500",
-    description: "Sophisticated wrought iron balcony railing for luxurious residential projects.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=800&fit=crop&q=80",
-    tag: "Custom Made",
-  },
-
-  // --- STEEL PRODUCTS ---
-  {
-    id: 5,
-    title: "Stainless Steel Glass Railing",
-    category: "Steel",
-    price: "₹1,850 per Rft",
-    description: "Sleek and minimalist 304-grade steel railing with tempered glass panels.",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=800&fit=crop&q=80",
-    tag: "Top Rated",
-  },
-  {
-    id: 6,
-    title: "Steel Wooden-Finish Gate",
-    category: "Steel",
-    price: "₹55,000 onwards",
-    description: "Ultra-modern steel entrance gate featuring premium walnut-finish metal panels.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=800&fit=crop&q=80",
-    tag: "Modern Design",
-  },
-  {
-    id: 7,
-    title: "Heavy Industrial Steel Racks",
-    category: "Steel",
-    price: "₹15,000 onwards",
-    description: "High loading capacity steel storage racks for warehouse and factories.",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=800&fit=crop&q=80",
-    tag: "Industrial",
-  },
-  {
-    id: 8,
-    title: "Sleek Stainless Steel Door",
-    category: "Steel",
-    price: "₹32,500 onwards",
-    description: "Rustproof premium stainless steel safety door with smart lock option.",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=800&fit=crop&q=80",
-    tag: "Highly Durable",
-  },
-
-  // --- ALUMINIUM PRODUCTS ---
-  {
-    id: 9,
-    title: "Acoustic Sliding Windows",
-    category: "Aluminium",
-    price: "₹450 per Sqft",
-    description: "Double-glazed powder-coated sliding windows for complete noise insulation.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=800&fit=crop&q=80",
-    tag: "Energy Efficient",
-  },
-  {
-    id: 10,
-    title: "Sleek Glass Partition System",
-    category: "Aluminium",
-    price: "₹38,000 onwards",
-    description: "Anodized slim aluminium frame partitions for corporate and modern offices.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=800&fit=crop&q=80",
-    tag: "Office Choice",
-  },
-  {
-    id: 11,
-    title: "LED Shop Display Showcase",
-    category: "Aluminium",
-    price: "₹19,500 onwards",
-    description: "Premium anodized aluminium display case with integrated LED spotlighting.",
-    image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=600&h=800&fit=crop&q=80",
-    tag: "Retail Favorite",
-  },
-  {
-    id: 12,
-    title: "Modern Frosted Aluminium Door",
-    category: "Aluminium",
-    price: "₹16,500 onwards",
-    description: "Contemporary bathroom and passage door with high-grade aluminium and frosted glass.",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=800&fit=crop&q=80",
-    tag: "New Arrival",
-  },
-];
-
-const tabData = [
-  { id: "Iron", label: "Iron", icon: Hammer, desc: "Classic Strength & Artistry" },
-  { id: "Steel", label: "Steel", icon: Shield, desc: "Sleek Modernity & Durability" },
-  { id: "Aluminium", label: "Aluminium", icon: Layers, desc: "Lightweight Precision & Finish" },
-] as const;
-
 export default function PopularWorks() {
-  const [activeTab, setActiveTab] = useState<"Iron" | "Steel" | "Aluminium">("Iron");
+  const { categories } = useCategoryStore();
+  const [activeTab, setActiveTab] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
   const [isSwitched, setIsSwitched] = useState(false);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
-
-  // Wishlist state
-  const [wishlist, setWishlist] = useState<number[]>([]);
-
-  // Mouse drag-to-scroll state
+  const [wishlist, setWishlist] = useState<string[]>([]);
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeftVal = useRef(0);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const activeProducts = productsData.filter((p) => p.category === activeTab);
+  // pehli category default set karo
+  useEffect(() => {
+    if (categories.length && !activeTab) {
+      setActiveTab(categories[0]._id);
+    }
+  }, [categories]);
+
+  // activeTab badalne par products fetch karo
+  useEffect(() => {
+    if (!activeTab) return;
+    setLoadingProducts(true);
+    setIsSwitched(true);
+    getProducts({ limit: 5, category: activeTab })
+      .then((res) => setProducts(res.data || []))
+      .catch(() => setProducts([]))
+      .finally(() => { setIsSwitched(false); setLoadingProducts(false); });
+
+    const el = scrollContainerRef.current;
+    if (el) { el.scrollLeft = 0; setShowLeftArrow(false); setShowRightArrow(true); }
+  }, [activeTab]);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = scrollContainerRef.current;
@@ -215,14 +112,11 @@ export default function PopularWorks() {
     }
   };
 
-  const toggleWishlist = (id: number, e: React.MouseEvent) => {
+  const toggleWishlist = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (isDragging) return;
-    
-    setWishlist((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
+    setWishlist((prev) => prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]);
   };
 
   // Check scroll positions to show/hide navigation arrows
@@ -242,29 +136,10 @@ export default function PopularWorks() {
     const el = scrollContainerRef.current;
     if (el) {
       el.addEventListener("scroll", checkScrollStatus);
-      // Run once initially
       checkScrollStatus();
     }
-    return () => {
-      if (el) el.removeEventListener("scroll", checkScrollStatus);
-    };
-  }, [activeTab]);
-
-  // Adjust scroll when tab changes
-  useEffect(() => {
-    setIsSwitched(true);
-    const timer = setTimeout(() => setIsSwitched(false), 300);
-    
-    // Reset scroll positions
-    const el = scrollContainerRef.current;
-    if (el) {
-      el.scrollLeft = 0;
-      setShowLeftArrow(false);
-      setShowRightArrow(true);
-    }
-
-    return () => clearTimeout(timer);
-  }, [activeTab]);
+    return () => { if (el) el.removeEventListener("scroll", checkScrollStatus); };
+  }, [products]);
 
   const handleScroll = (direction: "left" | "right") => {
     const el = scrollContainerRef.current;
@@ -309,31 +184,24 @@ export default function PopularWorks() {
 
         {/* --- Tabs Switcher --- */}
         <div className="flex flex-col items-center justify-center mb-12">
-          {/* Centered Tab Buttons */}
           <div className="flex p-1.5 bg-white border border-slate-200/80 rounded-2xl shadow-md max-w-full overflow-x-auto scrollbar-none gap-1 shrink-0">
-            {tabData.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
+            {categories.map((cat) => {
+              const isActive = activeTab === cat._id;
               return (
                 <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  key={cat._id}
+                  onClick={() => setActiveTab(cat._id)}
                   className={`flex items-center gap-2.5 px-4 md:px-6 py-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 whitespace-nowrap outline-none cursor-pointer ${
                     isActive
                       ? "bg-brand text-white shadow-md shadow-brand/20 scale-105"
                       : "text-slate-600 hover:text-brand hover:bg-brand/5"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 transition-transform duration-300 ${isActive ? "rotate-6 scale-110" : ""}`} />
-                  <span>{tab.label}</span>
+                  {cat.name}
                 </button>
               );
             })}
           </div>
-          {/* Active Tab Subtext */}
-          <p className="mt-3 text-xs font-medium text-slate-400 tracking-wide uppercase transition-all duration-300">
-            {tabData.find((t) => t.id === activeTab)?.desc}
-          </p>
         </div>
 
         {/* --- Product Slider Area --- */}
@@ -377,37 +245,47 @@ export default function PopularWorks() {
               scrollBehavior: "smooth",
             }}
           >
-            {activeProducts.map((p) => (
+            {loadingProducts
+              ? Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center flex flex-col animate-pulse">
+                    <div className="aspect-[4/3] w-full bg-slate-200" />
+                    <div className="p-5 flex flex-col gap-3">
+                      <div className="h-3 w-20 bg-slate-200 rounded-full" />
+                      <div className="h-4 w-3/4 bg-slate-200 rounded-full" />
+                      <div className="h-3 w-full bg-slate-200 rounded-full" />
+                      <div className="h-3 w-2/3 bg-slate-200 rounded-full" />
+                      <div className="h-[1px] bg-slate-100 my-1" />
+                      <div className="h-4 w-1/3 bg-slate-200 rounded-full" />
+                      <div className="flex gap-2 mt-1">
+                        <div className="h-9 flex-1 bg-slate-200 rounded-md" />
+                        <div className="h-9 w-24 bg-slate-200 rounded-md" />
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : products.map((p) => (
               <div
-                key={p.id}
+                key={p._id}
                 className="flex-none w-[280px] md:w-[310px] bg-white border border-slate-200/70 rounded-md overflow-hidden snap-center group/card transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/5 hover:border-orange-200 hover:-translate-y-1.5 flex flex-col justify-between"
               >
-                {/* Product Image Area */}
                 <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden shrink-0">
                   <img
-                    src={p.image}
-                    alt={p.title}
+                    src={p.mainImage?.url}
+                    alt={p.name}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-110"
                   />
-                  {/* Badge */}
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase bg-slate-900/80 backdrop-blur-sm text-white border border-white/10 shadow-md">
-                    {p.tag}
-                  </span>
-                  
-                  {/* Overlay Gradient on Image */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                {/* Card Content */}
                 <div className="p-5 flex flex-col flex-grow">
                   <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase text-brand tracking-wider mb-2">
                     <Tag className="w-3 h-3" />
-                    <span>{p.category} Fabrication</span>
+                    <span>{p.category?.name}</span>
                   </div>
 
                   <h3 className="text-base md:text-lg font-bold text-slate-800 line-clamp-1 group-hover/card:text-brand transition-colors duration-200">
-                    {p.title}
+                    {p.name}
                   </h3>
 
                   <p className="mt-1.5 text-xs text-slate-400 line-clamp-2 leading-relaxed flex-grow">
@@ -416,38 +294,43 @@ export default function PopularWorks() {
 
                   <div className="h-[1px] bg-slate-100 my-4" />
 
-                  {/* Price and Action Buttons */}
                   <div className="mt-auto space-y-3">
                     <div>
-                      <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider leading-none">Price Est.</p>
-                      <p className="text-base font-extrabold text-slate-900 mt-1">{p.price}</p>
+                      <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider leading-none">Price</p>
+                      <p className="text-base font-extrabold text-slate-900 mt-1">
+                        ₹{(p.price - (p.price * (p.discount || 0)) / 100).toLocaleString("en-IN")}
+                        {p.discount > 0 && (
+                          <span className="ml-2 text-xs line-through text-slate-400 font-normal">₹{p.price.toLocaleString("en-IN")}</span>
+                        )}
+                      </p>
                     </div>
 
                     <div className="flex items-center gap-2.5">
                       <Link
-                        href="/contact"
+                        href={`/product/${p._id}`}
+                        onClick={handleLinkClick}
                         className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-brand px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-brand/30 active:scale-95"
                       >
-                        <span>Order Now</span>
+                        <span>View Product</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
 
                       <button
-                        onClick={(e) => toggleWishlist(p.id, e)}
+                        onClick={(e) => toggleWishlist(p._id, e)}
                         className={`inline-flex items-center justify-center gap-1.5 font-bold text-xs px-4 py-2.5 rounded-md transition-all duration-300 hover:scale-105 active:scale-95 border cursor-pointer select-none group/wishlist-btn ${
-                          wishlist.includes(p.id)
+                          wishlist.includes(p._id)
                             ? "bg-red-500 hover:bg-red-600 border-transparent text-white shadow-md shadow-red-500/20"
                             : "bg-white hover:bg-slate-50 border-slate-200 text-slate-700 hover:text-slate-900"
                         }`}
                       >
                         <Heart
                           className={`w-3.5 h-3.5 transition-all duration-300 ${
-                            wishlist.includes(p.id)
+                            wishlist.includes(p._id)
                               ? "fill-current text-white scale-110"
                               : "text-slate-400 group-hover/wishlist-btn:text-red-500 group-hover/wishlist-btn:scale-110"
                           }`}
                         />
-                        <span>{wishlist.includes(p.id) ? "Wishlisted" : "Wishlist"}</span>
+                        <span>{wishlist.includes(p._id) ? "Wishlisted" : "Wishlist"}</span>
                       </button>
                     </div>
                   </div>
@@ -458,7 +341,7 @@ export default function PopularWorks() {
 
           {/* Bottom Indicators */}
           <div className="flex justify-center gap-2 mt-4">
-            {activeProducts.map((_, i) => (
+            {products.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {
