@@ -6,6 +6,11 @@ import Link from "next/link";
 import { getProducts } from "@/apis/products";
 import useCategoryStore from "@/store/useCategoryStore";
 
+interface Category {
+  _id: string;
+  name: string;
+}
+
 interface Product {
   _id: string;
   name: string;
@@ -17,7 +22,7 @@ interface Product {
 }
 
 export default function PopularWorks() {
-  const { categories } = useCategoryStore();
+  const { categories } = useCategoryStore() as { categories: Category[] };
   const [activeTab, setActiveTab] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [isSwitched, setIsSwitched] = useState(false);

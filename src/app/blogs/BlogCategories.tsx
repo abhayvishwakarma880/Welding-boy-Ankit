@@ -10,7 +10,7 @@ type Props = {
 export default function BlogCategories({ active, onChange }: Props) {
   const { categories } = useCategoryStore();
 
-  const allCategories = ["All", ...categories.map((c) => c.name)];
+  const allCategories = ["All", ...categories.map((c: { name: string }) => c.name)];
 
   return (
     <section className="bg-white py-5 px-4 border-b border-zinc-100 sticky top-0 z-40 shadow-sm">

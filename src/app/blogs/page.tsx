@@ -35,7 +35,7 @@ export default function BlogsPage() {
   const fetchBlogs = useCallback(async (cat: string, pg: number, search: string) => {
     try {
       setLoading(true);
-      const categoryId = cat === "All" ? "" : categories.find((c) => c.name === cat)?._id || "";
+      const categoryId = cat === "All" ? "" : categories.find((c: { _id: string; name: string }) => c.name === cat)?._id || "";
       const res = await getBlogs({ page: pg, limit: 9, category: categoryId, search });
       if (pg === 1) {
         setBlogs(res.data || []);

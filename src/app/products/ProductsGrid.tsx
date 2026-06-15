@@ -45,7 +45,7 @@ export default function ProductsGrid({
   const { categories } = useCategoryStore();
   const [inputValue, setInputValue] = useState(search);
 
-  const categoryList = ["All", ...categories.map((c) => c.name)];
+  const categoryList = ["All", ...categories.map((c: { name: string }) => c.name)];
 
   return (
     <section className="bg-slate-50 py-14 px-6 md:px-12 font-sans">

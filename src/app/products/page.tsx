@@ -39,7 +39,7 @@ export default function ProductsPage() {
   const fetchProducts = useCallback(async (cat: string, pg: number, q: string) => {
     try {
       setLoading(true);
-      const categoryId = cat === "All" ? "" : categories.find((c) => c.name === cat)?._id || "";
+      const categoryId = cat === "All" ? "" : categories.find((c: { _id: string; name: string }) => c.name === cat)?._id || "";
       const res = await getProducts({ page: pg, limit: 12, category: categoryId, search: q, isActive: "true" });
       if (pg === 1) {
         setProducts(res.data || []);

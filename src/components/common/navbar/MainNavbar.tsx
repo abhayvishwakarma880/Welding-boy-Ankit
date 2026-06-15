@@ -183,7 +183,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                     >
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-1">Browse Categories</p>
                       <div className="grid grid-cols-3 gap-1">
-                        {categories.map((cat) => (
+                        {categories.map((cat: { _id: string; name: string }) => (
                           <Link
                             key={cat._id}
                             href={`/products?category=${cat._id}`}

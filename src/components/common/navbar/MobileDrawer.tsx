@@ -133,7 +133,7 @@ export default function MobileDrawer({ open, onClose }: Props) {
 
             <div className={`overflow-hidden transition-all duration-300 ${catOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
               <div className="grid grid-cols-2 gap-1 pb-3">
-                {categories.map((cat) => (
+                {categories.map((cat: { _id: string; name: string }) => (
                   <Link
                     key={cat._id}
                     href={`/products?category=${cat._id}`}

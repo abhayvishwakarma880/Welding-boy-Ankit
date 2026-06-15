@@ -47,11 +47,8 @@ export default function HeroSlider() {
     mountRef.current.appendChild(renderer.domElement);
 
     const loader = new THREE.TextureLoader();
-    const textures = images.map((img) => {
-      const t = loader.load(img);
-      t.crossOrigin = "anonymous";
-      return t;
-    });
+    loader.crossOrigin = "anonymous";
+    const textures = images.map((img) => loader.load(img));
 
     const uniforms = {
       texture1: { value: textures[0] },
