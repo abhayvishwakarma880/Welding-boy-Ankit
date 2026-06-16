@@ -3,9 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Tag, Search, ImageIcon } from "lucide-react";
+import { Tag, Search, ImageIcon, Heart } from "lucide-react";
 import { Product } from "./page";
 import useCategoryStore from "@/store/useCategoryStore";
+import useUserStore from "@/store/useUserStore";
+import useWishlistStore from "@/store/useWishlistStore";
+import LoginModal from "@/components/common/LoginModal";
 
 type Props = {
   products: Product[];
@@ -44,10 +47,27 @@ export default function ProductsGrid({
 }: Props) {
   const { categories } = useCategoryStore();
   const [inputValue, setInputValue] = useState(search);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [pendingProductId, setPendingProductId] = useState<string | null>(null);
+
+  const { isLoggedIn, token } = useUserStore();
+  const { wishlistIds, addWishlist: storeAddWishlist } = useWishlistStore();
+
+  const handleWishlistClick = async (productId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isLoggedIn) {
+      setPendingProductId(productId);
+      setLoginModalOpen(true);
+      return;
+    }
+    await storeAddWishlist(productId, token);
+  };
 
   const categoryList = ["All", ...categories.map((c: { name: string }) => c.name)];
 
   return (
+    <>
     <section className="bg-slate-50 py-14 px-6 md:px-12 font-sans">
       <div className="max-w-7xl mx-auto">
 
@@ -199,6 +219,21 @@ export default function ProductsGrid({
                     >
                       Order Now
                     </Link>
+                    <button
+                      onClick={(e) => handleWishlistClick(product._id, e)}
+                      className={`p-2 rounded-lg border transition-all duration-200 hover:scale-105 active:scale-95 shrink-0 ${
+                        wishlistIds.includes(product._id)
+                          ? "bg-red-500 border-transparent text-white"
+                          : "bg-white border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-300"
+                      }`}
+                      title={wishlistIds.includes(product._id) ? "Remove from Wishlist" : "Add to Wishlist"}
+                    >
+                      <Heart
+                        className={`w-3.5 h-3.5 transition-all duration-200 ${
+                          wishlistIds.includes(product._id) ? "fill-current" : ""
+                        }`}
+                      />
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -219,5 +254,13 @@ export default function ProductsGrid({
         )}
       </div>
     </section>
+
+    {/* Login Modal */}
+    <LoginModal
+      isOpen={loginModalOpen}
+      onClose={() => { setLoginModalOpen(false); setPendingProductId(null); }}
+      pendingProductId={pendingProductId}
+    />
+  </>
   );
 }

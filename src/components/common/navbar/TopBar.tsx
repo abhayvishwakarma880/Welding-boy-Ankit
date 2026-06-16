@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import useUserStore from "@/store/useUserStore";
 
 // Google Translate ke liye global type
 declare global {
@@ -42,6 +44,8 @@ export default function TopBar() {
     };
     tryTranslate();
   };
+  
+  const { isLoggedIn } = useUserStore();
   const [flash, setFlash] = useState(false);
   const [alert, setAlert] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -136,13 +140,22 @@ export default function TopBar() {
 
         {/* Right buttons */}
         <div className="flex items-center gap-1.5 shrink-0">
-          {/* Login - hidden on mobile */}
-          <button className={`${btnClass} hidden sm:flex`}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            Login
-          </button>
+          {/* Login/Profile - hidden on mobile */}
+          {isLoggedIn ? (
+            <Link href="/profile" className={`${btnClass} hidden sm:flex`}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Profile
+            </Link>
+          ) : (
+            <Link href="/login" className={`${btnClass} hidden sm:flex`}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Login
+            </Link>
+          )}
 
           {/* Create Order - hidden on mobile */}
           <button className={`${btnClass} hidden sm:flex`}>

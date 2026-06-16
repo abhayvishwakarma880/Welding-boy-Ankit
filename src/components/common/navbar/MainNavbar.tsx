@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { navLinks } from "./navLink";
 import MobileDrawer from "./MobileDrawer";
 import useCategoryStore from "@/store/useCategoryStore";
+import useWishlistStore from "@/store/useWishlistStore";
 
 export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
   const [catOpen, setCatOpen] = useState(false);
@@ -13,6 +14,8 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { categories } = useCategoryStore();
+  const { wishlistIds } = useWishlistStore();
+  const wishlistCount = wishlistIds.length;
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -61,11 +64,16 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
               </span>
             </Link>
 
-            {/* Wishlist icon */}
+            {/* Wishlist icon - mobile */}
             <Link href="/wishlist" className="relative p-2 text-gray-600 hover:text-brand transition shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
               </svg>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
 
             {/* Cart icon */}
@@ -136,12 +144,17 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                     </button>
                   </div>
 
-                  {/* Wishlist */}
-                  <Link href="/wishlist" className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition shrink-0 min-w-[130px]">
+                  {/* Wishlist - desktop row 1 */}
+                  <Link href="/wishlist" className="relative flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition shrink-0 min-w-[130px]">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
                     </svg>
                     <p className="text-sm font-semibold">Wishlist</p>
+                    {wishlistCount > 0 && (
+                      <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                        {wishlistCount}
+                      </span>
+                    )}
                   </Link>
 
                   {/* Cart */}
@@ -245,11 +258,16 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                   <div className={`flex items-center gap-2 shrink-0 transition-all duration-300 ${
                     isFixed ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 translate-x-4 pointer-events-none w-0 overflow-hidden"
                   }`}>
-                    <Link href="/wishlist" className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition text-sm font-medium">
+                    <Link href="/wishlist" className="relative flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-gray-600 hover:text-brand hover:border-brand transition text-sm font-medium">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
                       </svg>
                       Wishlist
+                      {wishlistCount > 0 && (
+                        <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
+                          {wishlistCount}
+                        </span>
+                      )}
                     </Link>
                     <Link href="/cart" className="flex items-center gap-1.5 px-3 py-1.5 bg-brand text-white rounded-lg transition text-sm font-medium">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">

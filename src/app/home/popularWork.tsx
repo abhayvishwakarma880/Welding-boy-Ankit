@@ -5,6 +5,9 @@ import { ChevronLeft, ChevronRight, ArrowRight, Tag, Heart } from "lucide-react"
 import Link from "next/link";
 import { getProducts } from "@/apis/products";
 import useCategoryStore from "@/store/useCategoryStore";
+import useUserStore from "@/store/useUserStore";
+import useWishlistStore from "@/store/useWishlistStore";
+import LoginModal from "@/components/common/LoginModal";
 
 interface Category {
   _id: string;
@@ -30,7 +33,11 @@ export default function PopularWorks() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
-  const [wishlist, setWishlist] = useState<string[]>([]);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [pendingProductId, setPendingProductId] = useState<string | null>(null);
+
+  const { isLoggedIn, token } = useUserStore();
+  const { wishlistIds, addWishlist: storeAddWishlist } = useWishlistStore();
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeftVal = useRef(0);
@@ -117,11 +124,17 @@ export default function PopularWorks() {
     }
   };
 
-  const toggleWishlist = (id: string, e: React.MouseEvent) => {
+  const toggleWishlist = async (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (isDragging) return;
-    setWishlist((prev) => prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]);
+    if (!isLoggedIn || !token) {
+      // Open login modal with pending product
+      setPendingProductId(id);
+      setLoginModalOpen(true);
+      return;
+    }
+    await storeAddWishlist(id, token);
   };
 
   // Check scroll positions to show/hide navigation arrows
@@ -160,6 +173,7 @@ export default function PopularWorks() {
   };
 
   return (
+    <>
     <section className="bg-slate-50 relative py-10 px-6 md:px-12 overflow-hidden font-sans border border-slate-200/80 rounded-md max-w-7xl mx-4 md:mx-8 xl:mx-auto my-16 shadow-md shadow-slate-100">
       {/* Background visual element: grid */}
       <div
@@ -323,19 +337,19 @@ export default function PopularWorks() {
                       <button
                         onClick={(e) => toggleWishlist(p._id, e)}
                         className={`inline-flex items-center justify-center gap-1.5 font-bold text-xs px-4 py-2.5 rounded-md transition-all duration-300 hover:scale-105 active:scale-95 border cursor-pointer select-none group/wishlist-btn ${
-                          wishlist.includes(p._id)
+                          wishlistIds.includes(p._id)
                             ? "bg-red-500 hover:bg-red-600 border-transparent text-white shadow-md shadow-red-500/20"
                             : "bg-white hover:bg-slate-50 border-slate-200 text-slate-700 hover:text-slate-900"
                         }`}
                       >
                         <Heart
                           className={`w-3.5 h-3.5 transition-all duration-300 ${
-                            wishlist.includes(p._id)
+                            wishlistIds.includes(p._id)
                               ? "fill-current text-white scale-110"
                               : "text-slate-400 group-hover/wishlist-btn:text-red-500 group-hover/wishlist-btn:scale-110"
                           }`}
                         />
-                        <span>{wishlist.includes(p._id) ? "Wishlisted" : "Wishlist"}</span>
+                        <span>{wishlistIds.includes(p._id) ? "Wishlisted" : "Wishlist"}</span>
                       </button>
                     </div>
                   </div>
@@ -369,5 +383,13 @@ export default function PopularWorks() {
 
       </div>
     </section>
+
+    {/* Login Modal */}
+    <LoginModal
+      isOpen={loginModalOpen}
+      onClose={() => { setLoginModalOpen(false); setPendingProductId(null); }}
+      pendingProductId={pendingProductId}
+    />
+  </>
   );
 }
