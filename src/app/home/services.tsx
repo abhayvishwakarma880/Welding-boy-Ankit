@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const services = [
   {
     id: 1,
+    slug: "steel-welding",
     heading: "Steel Welding",
     desc: "Strong and durable welding solutions.",
     icon: (
@@ -18,6 +20,7 @@ const services = [
   },
   {
     id: 2,
+    slug: "metal-fabrication",
     heading: "Metal Fabrication",
     desc: "Custom metal structures with precision.",
     icon: (
@@ -32,6 +35,7 @@ const services = [
   },
   {
     id: 3,
+    slug: "gate-grill",
     heading: "Gate & Grill",
     desc: "Modern safety designs for properties.",
     icon: (
@@ -48,6 +52,7 @@ const services = [
   },
   {
     id: 4,
+    slug: "industrial-work",
     heading: "Industrial Work",
     desc: "Heavy-duty fabrication for industries.",
     icon: (
@@ -61,6 +66,7 @@ const services = [
   },
   {
     id: 5,
+    slug: "repair-services",
     heading: "Repair Services",
     desc: "Quick maintenance and metal repairs.",
     icon: (
@@ -73,6 +79,7 @@ const services = [
   },
   {
     id: 6,
+    slug: "custom-design",
     heading: "Custom Design",
     desc: "Tailored solutions based on requirements.",
     icon: (
@@ -141,8 +148,9 @@ export default function ServiceSection() {
         {/* Mobile: 2 col | Desktop: 4 col (6 cards = 4+2 or 3+3 — we do 2 rows of 3 on md, 4+2 on lg via auto) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
           {services.map((service, index) => (
-            <div
+            <Link
               key={service.id}
+              href={`/services/${service.slug}`}
               className="group relative bg-white border border-zinc-200 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-brand-hover hover:shadow-xl hover:shadow-brand-shadow/20 hover:-translate-y-1"
               style={{
                 minHeight: "160px",
@@ -173,7 +181,7 @@ export default function ServiceSection() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

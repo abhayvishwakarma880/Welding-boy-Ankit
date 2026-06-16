@@ -94,7 +94,7 @@ export default function AboutSection() {
             style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(-20px)", transitionDelay: "0.1s" }}
           >
             <Image
-              src="/images/sliders/01.png"
+              src="/images/sliders/hero-welding-services-khadda.webp"
               alt="Welding work"
               width={600}
               height={400}

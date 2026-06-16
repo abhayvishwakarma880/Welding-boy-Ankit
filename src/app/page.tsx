@@ -19,11 +19,19 @@ export const metadata: Metadata = {
   title: "Shree Vishwakarma Welding Shop | Welding & Fabrication Services in Kushinagar",
   description:
     "Professional welding, metal fabrication, gate manufacturing, grill installation and custom fabrication services in Kushinagar, Uttar Pradesh.",
+  keywords: [
+    "welding services khadda",
+    "welder in kushinagar",
+    "gate fabrication khadda",
+    "steel welding kushinagar",
+    "grill fabrication khadda",
+    "metal fabrication kushinagar",
+  ],
   openGraph: {
     title: "Shree Vishwakarma Welding Shop | Welding & Fabrication Services in Kushinagar",
     description:
       "Professional welding, metal fabrication, gate manufacturing, grill installation and custom fabrication services in Kushinagar, Uttar Pradesh.",
-    url: "https://vishwakarmawelding.com",
+    url: "https://vishwakarmawelding.in",
   },
 };
 

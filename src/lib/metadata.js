@@ -1,4 +1,4 @@
 export const defaultMetadata = {
-  title: "Shree Vishwakarma Welding",
-  description: "Iron gate, Steel railing, aluminium gate, aluminium grill, aluminium all work, grill and welding work.",
+  title: "Vishwakarma Welding | Welding Services in khadda kushinagar",
+  description: "Professional welding services in Lucknow. Gate, grill, railing, shed and fabrication work.",
 }
