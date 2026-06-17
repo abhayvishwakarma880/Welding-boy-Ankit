@@ -16,7 +16,7 @@ const FounderSection  = dynamic(() => import("./home/founderSection"));
 const FAQSection      = dynamic(() => import("./home/faqSection"));
 
 export const metadata: Metadata = {
-  title: "Shree Vishwakarma Welding Shop | Welding & Fabrication Services in Kushinagar",
+  title: "Vishwakarma Welding | Welding & Fabrication Services in Kushinagar",
   description:
     "Professional welding, metal fabrication, gate manufacturing, grill installation and custom fabrication services in Kushinagar, Uttar Pradesh.",
   keywords: [

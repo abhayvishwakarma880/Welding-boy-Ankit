@@ -58,8 +58,7 @@ export default function FounderSection() {
         >
           <div className="relative rounded-2xl overflow-hidden w-full h-full min-h-[300px] shadow-2xl shadow-slate-300/50">
             <img
-              // src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=1000&fit=crop&q=80"
-              src="images/banner/hero.png"
+              src="images/banner/hero.webp"
               alt="Ankit Vishwakarma - Founder"
               className="w-full h-full object-cover absolute inset-0"
             />

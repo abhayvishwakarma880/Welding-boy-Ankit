@@ -13,10 +13,10 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vishwakarmawelding.com"),
+  metadataBase: new URL("https://vishwakarmawelding.in"),
   title: {
-    default: "Shree Vishwakarma Welding Shop | Welding & Fabrication Services in Kushinagar",
-    template: "%s | Vishwakarma Welding Shop",
+    default: "Vishwakarma Welding | Welding & Fabrication Services in Kushinagar",
+    template: "%s | Vishwakarma Welding",
   },
   description:
     "Professional welding, metal fabrication, gate manufacturing, grill installation and custom fabrication services in Kushinagar, Uttar Pradesh.",
@@ -28,24 +28,27 @@ export const metadata: Metadata = {
     "window grill",
     "metal fabrication UP",
   ],
-  authors: [{ name: "Shree Vishwakarma Welding Shop" }],
+  authors: [{ name: "Vishwakarma Welding" }],
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  icons: {
+    icon: "/images/logo/logo.webp",
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://vishwakarmawelding.com",
-    siteName: "Shree Vishwakarma Welding Shop",
-    title: "Shree Vishwakarma Welding Shop | Welding & Fabrication Services in Kushinagar",
+    url: "https://vishwakarmawelding.in",
+    siteName: "Vishwakarma Welding",
+    title: "Vishwakarma Welding | Welding & Fabrication Services in Kushinagar",
     description:
       "Professional welding, metal fabrication, gate manufacturing, grill installation and custom fabrication services in Kushinagar, Uttar Pradesh.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shree Vishwakarma Welding Shop",
+    title: "Vishwakarma Welding",
     description:
       "Professional welding & fabrication services in Kushinagar, UP.",
   },

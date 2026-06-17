@@ -62,7 +62,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
             {/* Logo */}
             <Link href="/" className="flex-1 flex items-center">
               <Image
-                src="https://i.pinimg.com/736x/5d/33/07/5d33076e393254dfaec0af381d401008.jpg"
+                src="/logo/logo.webp"
                 alt="Shree Vishwakarma Welding"
                 width={48}
                 height={48}
@@ -213,7 +213,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                 className="flex items-center shrink-0 py-2 pr-4 border-r border-gray-200 transition-all duration-300"
               >
                 <Image
-                  src="https://i.pinimg.com/736x/5d/33/07/5d33076e393254dfaec0af381d401008.jpg"
+                  src="/logo/logo.webp"
                   alt="Shree Vishwakarma Welding"
                   width={isFixed ? 36 : 80}
                   height={isFixed ? 36 : 80}

@@ -11,7 +11,7 @@ export default function Banner() {
 
             {/* Base image */}
             <Image
-              src="/images/banner/bannerOne.png"
+              src="/images/banner/bannerOne.webp"
               alt="Steel Gate Banner"
               width={800}
               height={450}
@@ -24,7 +24,7 @@ export default function Banner() {
           {/* Banner 2 */}
           <div className="overflow-hidden rounded-2xl border border-zinc-200 shadow-md">
             <Image
-              src="/images/banner/bannerTwo.png"
+              src="/images/banner/bannerTwo.webp"
               alt="Welding Service Banner 2"
               width={800}
               height={450}

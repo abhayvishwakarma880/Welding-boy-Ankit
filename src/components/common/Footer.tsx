@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Phone, MapPin, Mail, Flame } from "lucide-react";
+import Image from "next/image";
+import { Phone, MapPin, Mail } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const quickLinks = [
@@ -33,9 +34,14 @@ export default function Footer() {
         {/* Col 1 — Brand */}
         <div className="flex flex-col gap-4 col-span-2 lg:col-span-1">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-brand flex items-center justify-center shadow-lg shadow-brand/30">
-              <Flame className="w-5 h-5 text-white" strokeWidth={2.5} />
-            </div>
+            <Image
+              src="/logo/logo.webp"
+              alt="Vishwakarma Welding Shop"
+              width={48}
+              height={48}
+              className="object-contain rounded bg-white p-0.5"
+              unoptimized
+            />
             <div className="leading-none">
               <p className="text-white font-extrabold text-base tracking-tight">Vishwakarma</p>
               <p className="text-brand text-[11px] font-semibold uppercase tracking-widest">Welding Shop</p>
