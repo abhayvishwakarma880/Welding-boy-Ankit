@@ -33,3 +33,13 @@ export const updateProfile = async (formData) => {
   });
   return res.data;
 };
+
+export const getProfileById = async (id) => {
+  const token = useUserStore.getState().token;
+  const res = await http.get(`/users/get-profile/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+};

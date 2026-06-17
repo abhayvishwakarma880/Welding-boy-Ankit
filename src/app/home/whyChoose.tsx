@@ -13,7 +13,7 @@ return (
           </p>
 
           <p>
-            <span className="bg-brand text-black font-semibold px-2 py-1 rounded-sm">
+            <span className="bg-brand text-white font-semibold px-2 py-1 rounded-sm">
               Professional Welding & Fabrication
             </span>{" "}
             – We work on gates, grills, railings, staircases, sheds, shutters,
@@ -21,24 +21,24 @@ return (
             finish.
           </p>
 
-          <p>
+          <p className="hidden md:block">
             Every project is handled with skilled workmanship and quality
             material. From residential welding jobs to commercial fabrication,
             our goal is always to deliver strong structures with a polished and
             dependable finish.
           </p>
 
-          <p>
+          <p className="hidden md:block">
             Our team believes in combining practical design with lasting
             strength.{" "}
-            <span className="bg-brand text-black font-semibold px-2 py-1 rounded-sm">
+            <span className="bg-brand text-white font-semibold px-2 py-1 rounded-sm">
               Custom Welding Solutions Made for Your Space
             </span>{" "}
             means every piece is designed exactly according to your
             requirements—whether it’s safety, style, or durability.
           </p>
 
-          <p>
+          <p className="hidden md:block">
             With years of hands-on experience and a commitment to quality,
             Vishwakarma Welding Works continues to build durable structures and
             long-term trust through reliable service and precise craftsmanship.

@@ -3,17 +3,18 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/store/useUserStore";
-import { updateProfile } from "@/apis/userApi";
+import { updateProfile, getProfileById } from "@/apis/userApi";
 
 export default function ProfilePage() {
-  const { user, isLoggedIn, logout, updateUser } = useUserStore();
+  const { user, isLoggedIn, isInitialized, logout, updateUser } = useUserStore();
   const router = useRouter();
-  
+  console.log("updateUser-> ", user)
+
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,10 +24,38 @@ export default function ProfilePage() {
     pincode: "",
   });
 
+  // console.log("formdata-> ", formData)
+
+  // Fetch latest profile from backend on mount using user ID
   useEffect(() => {
-    if (!isLoggedIn) {
+    const fetchLatestProfile = async () => {
+      try {
+        if (user?._id) {
+          const res = await getProfileById(user._id);
+          if (res.success && res.data) {
+            updateUser(res.data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch fresh user profile data:", err);
+      }
+    };
+
+    if (isLoggedIn && user?._id) {
+      fetchLatestProfile();
+    }
+  }, [isLoggedIn, user?._id, updateUser]);
+
+  // Redirect to login if initialized and not logged in
+  useEffect(() => {
+    if (isInitialized && !isLoggedIn) {
       router.push("/login");
-    } else if (user) {
+    }
+  }, [isInitialized, isLoggedIn, router]);
+
+  // Sync form data with user store state changes
+  useEffect(() => {
+    if (user) {
       setFormData({
         name: user.name || "",
         email: user.email || "",
@@ -36,10 +65,14 @@ export default function ProfilePage() {
         pincode: user.pincode || "",
       });
     }
-  }, [isLoggedIn, user, router]);
+  }, [user]);
 
-  if (!isLoggedIn || !user) {
-    return null; // or a loading spinner
+  if (!isInitialized || !isLoggedIn || !user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-500 font-medium">Loading profile...</div>
+      </div>
+    );
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +85,7 @@ export default function ProfilePage() {
     setLoading(true);
     setErrorMsg("");
     setSuccessMsg("");
-    
+
     try {
       const formPayload = new FormData();
       Object.keys(formData).forEach((key) => {
@@ -106,7 +139,14 @@ export default function ProfilePage() {
           <div className="flex items-center gap-6 mb-8 border-b pb-6">
             <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden shrink-0">
               {user.profilePhoto?.url ? (
-                <Image src={user.profilePhoto.url} alt="Profile" width={96} height={96} className="w-full h-full object-cover" unoptimized />
+                <Image
+                  src={user.profilePhoto.url}
+                  alt="Profile"
+                  width={96}
+                  height={96}
+                  className="w-full h-full object-cover"
+                  unoptimized
+                />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-400 text-3xl font-bold uppercase">
                   {user.name ? user.name[0] : "U"}
@@ -114,7 +154,9 @@ export default function ProfilePage() {
               )}
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900">{user.name || "Add Your Name"}</h3>
+              <h3 className="text-2xl font-bold text-gray-900">
+                {user.name || "Add Your Name"}
+              </h3>
               <p className="text-gray-500 font-medium">+91 {user.mobile}</p>
             </div>
             {!isEditing && (
@@ -130,7 +172,9 @@ export default function ProfilePage() {
           <form onSubmit={handleUpdate} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -141,7 +185,9 @@ export default function ProfilePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -152,7 +198,9 @@ export default function ProfilePage() {
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Address
+                </label>
                 <input
                   type="text"
                   name="address"
@@ -163,7 +211,9 @@ export default function ProfilePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  City
+                </label>
                 <input
                   type="text"
                   name="city"
@@ -174,7 +224,9 @@ export default function ProfilePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  State
+                </label>
                 <input
                   type="text"
                   name="state"
@@ -185,7 +237,9 @@ export default function ProfilePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Pincode</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Pincode
+                </label>
                 <input
                   type="text"
                   name="pincode"

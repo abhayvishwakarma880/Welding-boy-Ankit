@@ -174,7 +174,7 @@ export default function WishlistPage() {
                     <div className="flex gap-2 mt-auto pt-3">
                       <Link
                         href={`/product/${p.slug || p._id}`}
-                        className="flex-1 py-2 text-center text-xs font-bold rounded-lg border border-brand text-brand hover:bg-brand hover:text-white transition-all duration-200"
+                        className="flex-1 py-2 text-center text-xs font-bold rounded-lg border border-brand text-brand hover:bg-brand hover:!text-white transition-all duration-200"
                       >
                         View Details
                       </Link>

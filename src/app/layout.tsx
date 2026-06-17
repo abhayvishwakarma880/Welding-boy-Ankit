@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   icons: {
-    icon: "/images/logo/logo.webp",
+    icon: "/logo/logo.webp",
   },
   openGraph: {
     type: "website",

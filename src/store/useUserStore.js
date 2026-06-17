@@ -15,17 +15,20 @@ const useUserStore = create((set) => ({
   user: null,
   token: null,
   isLoggedIn: false,
+  isInitialized: false,
 
   initUser: () => {
     const saved = loadFromStorage();
     if (saved?.user && saved?.token) {
-      set({ user: saved.user, token: saved.token, isLoggedIn: true });
+      set({ user: saved.user, token: saved.token, isLoggedIn: true, isInitialized: true });
+    } else {
+      set({ isInitialized: true });
     }
   },
 
   setUser: (user, token) => {
     localStorage.setItem(LOCAL_KEY, JSON.stringify({ user, token }));
-    set({ user, token, isLoggedIn: true });
+    set({ user, token, isLoggedIn: true, isInitialized: true });
   },
 
   updateUser: (updatedUser) => {

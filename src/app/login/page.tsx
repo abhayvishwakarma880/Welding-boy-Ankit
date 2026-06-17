@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [otpHint, setOtpHint] = useState<string | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
   const setUser = useUserStore((s) => s.setUser);
@@ -23,8 +24,13 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
     try {
-      await sendOtp(mobile);
+      const res = await sendOtp(mobile);
       setOtpSent(true);
+      if (res?.data?.otp) {
+        setOtpHint(res.data.otp);
+      } else if (res?.otp) {
+        setOtpHint(res.otp);
+      }
       setError("");
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to send OTP. Try again.");
@@ -74,7 +80,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-items-start py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account
@@ -128,6 +134,23 @@ export default function LoginPage() {
                 <label className="block text-sm font-medium text-gray-700 text-center mb-2">
                   Enter OTP sent to +91 {mobile}
                 </label>
+
+                {/* OTP Hint from server response */}
+                {otpHint && (
+                  <div
+                    className="mb-4 flex items-center justify-between bg-amber-50 border border-amber-300 rounded-lg px-4 py-2.5 cursor-pointer hover:bg-amber-100 transition mx-auto max-w-xs"
+                    onClick={() => setOtp(otpHint.split(""))}
+                    title="Click to auto-fill OTP"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-amber-500 text-sm">🔑</span>
+                      <span className="text-xs text-amber-700 font-medium">Your OTP:</span>
+                      <span className="text-lg font-extrabold tracking-[0.3em] text-amber-800">{otpHint}</span>
+                    </div>
+                    <span className="text-[10px] text-amber-500 font-semibold border border-amber-300 rounded px-1.5 py-0.5">TAP TO FILL</span>
+                  </div>
+                )}
+
                 <div className="flex justify-center gap-4">
                   {otp.map((digit, index) => (
                     <input
@@ -160,6 +183,7 @@ export default function LoginPage() {
                   onClick={() => {
                     setOtpSent(false);
                     setOtp(["", "", "", ""]);
+                    setOtpHint(null);
                     setError("");
                   }}
                   className="text-sm text-brand hover:underline"

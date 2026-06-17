@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import { getProducts } from "@/apis/products";
 
 interface Product {
@@ -40,6 +41,17 @@ export default function Project() {
         <div className="w-9 h-[3px] bg-brand rounded-[2px] mx-auto mt-2 mb-[14px]" />
       </div>
 
+      {/* View All Products Button */}
+      <div className="flex justify-center mt-6 pb-8">
+        <Link
+          href="/products"
+          className="inline-flex items-center gap-2 bg-brand text-white font-semibold px-6 py-3 rounded-full text-sm tracking-wide hover:bg-brand/90 hover:shadow-lg hover:scale-105 transition-all duration-300 active:scale-95"
+        >
+          View All Products
+          <span className="text-base">→</span>
+        </Link>
+      </div>
+
       {/* Swipe Cards */}
       <div
         ref={scrollRef}
@@ -48,9 +60,10 @@ export default function Project() {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {projects.map((p, i) => (
-          <div
+          <Link
+            href={`/product/${p._id}`}
             key={p._id}
-            className="flex-none w-[260px] h-[340px] rounded-[20px] overflow-hidden relative snap-center cursor-pointer transition-transform duration-200 ease-out hover:shadow-xl active:scale-[0.97] shadow-md"
+            className="flex-none w-[260px] h-[340px] rounded-[20px] overflow-hidden relative snap-center cursor-pointer transition-transform duration-200 ease-out hover:shadow-xl active:scale-[0.97] shadow-md block"
           >
             <img
               src={p.mainImage?.url}
@@ -69,7 +82,7 @@ export default function Project() {
                 {p.name}
               </h3>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
@@ -86,6 +99,8 @@ export default function Project() {
           />
         ))}
       </div>
+
+      
     </section>
   );
 }
