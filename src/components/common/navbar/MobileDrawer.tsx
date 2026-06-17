@@ -4,16 +4,26 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { navLinks } from "./navLink";
 import useCategoryStore from "@/store/useCategoryStore";
+import useUserStore from "@/store/useUserStore";
 
 interface Props {
   open: boolean;
   onClose: () => void;
+  onLoginClick: () => void;
 }
 
-export default function MobileDrawer({ open, onClose }: Props) {
+export default function MobileDrawer({ open, onClose, onLoginClick }: Props) {
   const [catOpen, setCatOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { categories } = useCategoryStore();
+  const isLoggedIn = useUserStore((s) => s.isLoggedIn);
+  const user = useUserStore((s) => s.user);
+  const logout = useUserStore((s) => s.logout);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -77,18 +87,47 @@ export default function MobileDrawer({ open, onClose }: Props) {
 
           {/* Quick actions */}
           <div className="flex gap-2 px-4 py-3 border-b border-gray-100">
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 border border-brand text-brand rounded-lg text-sm font-semibold">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              Login
-            </button>
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-brand text-white rounded-lg text-sm font-semibold">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Create Order
-            </button>
+            {mounted && isLoggedIn ? (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={onClose}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 border border-brand text-brand rounded-lg text-sm font-semibold"
+                >
+                  <span className="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center text-xs font-bold uppercase shrink-0">
+                    {user?.name?.charAt(0) || "U"}
+                  </span>
+                  {user?.name?.split(" ")[0] || "Profile"}
+                </Link>
+                <button
+                  onClick={() => { logout(); onClose(); }}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg text-sm font-semibold"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => { onClose(); setTimeout(() => onLoginClick(), 300); }}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 border border-brand text-brand rounded-lg text-sm font-semibold"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Login
+                </button>
+                <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-brand text-white rounded-lg text-sm font-semibold">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Create Order
+                </button>
+              </>
+            )}
           </div>
 
           {/* Nav Links */}

@@ -1,5 +1,6 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import useUserStore from "@/store/useUserStore";
 import { sendOtp, loginUser } from "@/apis/userApi";
 import useWishlistStore from "@/store/useWishlistStore";
@@ -16,9 +17,15 @@ export default function LoginModal({ isOpen, onClose, pendingProductId }: LoginM
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [mounted, setMounted] = useState(false);
+  const [otpHint, setOtpHint] = useState<string | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const setUser = useUserStore((s) => s.setUser);
   const addWishlist = useWishlistStore((s) => s.addWishlist);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const reset = () => {
     setMobile("");
@@ -42,8 +49,14 @@ export default function LoginModal({ isOpen, onClose, pendingProductId }: LoginM
     setError("");
     setLoading(true);
     try {
-      await sendOtp(mobile);
+      const res = await sendOtp(mobile);
       setOtpSent(true);
+      // Development: show OTP from response if available
+      if (res?.data?.otp) {
+        setOtpHint(res.data.otp);
+      } else if (res?.otp) {
+        setOtpHint(res.otp);
+      }
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to send OTP. Try again.");
     } finally {
@@ -93,11 +106,13 @@ export default function LoginModal({ isOpen, onClose, pendingProductId }: LoginM
     }
   };
 
-  if (!isOpen) return null;
+  if (!mounted) return null;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      className={`fixed inset-0 z-[99999] flex items-center justify-center p-4 transition-opacity duration-200 ${
+        isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
       onClick={handleClose}
     >
       {/* Backdrop */}
@@ -105,7 +120,9 @@ export default function LoginModal({ isOpen, onClose, pendingProductId }: LoginM
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className={`relative w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden transition-transform duration-200 ${
+          isOpen ? "scale-100" : "scale-95"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -169,6 +186,23 @@ export default function LoginModal({ isOpen, onClose, pendingProductId }: LoginM
                 <label className="block text-sm font-medium text-gray-700 text-center mb-3">
                   Enter OTP sent to +91 {mobile}
                 </label>
+
+                {/* OTP Hint from server response */}
+                {otpHint && (
+                  <div
+                    className="mb-3 flex items-center justify-between bg-amber-50 border border-amber-300 rounded-lg px-4 py-2.5 cursor-pointer hover:bg-amber-100 transition"
+                    onClick={() => setOtp(otpHint.split(""))}
+                    title="Click to auto-fill OTP"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-amber-500 text-sm">🔑</span>
+                      <span className="text-xs text-amber-700 font-medium">Your OTP:</span>
+                      <span className="text-lg font-extrabold tracking-[0.3em] text-amber-800">{otpHint}</span>
+                    </div>
+                    <span className="text-[10px] text-amber-500 font-semibold border border-amber-300 rounded px-1.5 py-0.5">TAP TO FILL</span>
+                  </div>
+                )}
+
                 <div className="flex justify-center gap-3">
                   {otp.map((digit, index) => (
                     <input
@@ -204,6 +238,7 @@ export default function LoginModal({ isOpen, onClose, pendingProductId }: LoginM
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
