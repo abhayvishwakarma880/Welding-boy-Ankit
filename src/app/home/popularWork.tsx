@@ -173,9 +173,9 @@ export default function PopularWorks() {
 
           {/* ── Heading ─────────────────────────────────────────────────────── */}
           <div className="text-center mb-7 px-4 md:px-12">
-            <p className="text-[10px] md:text-xs font-extrabold uppercase tracking-[0.18em] text-brand mb-2">
+            {/* <p className="text-[10px] md:text-xs font-extrabold uppercase tracking-[0.18em] text-brand mb-2">
               Crafted with Precision
-            </p>
+            </p> */}
             <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
               Popular{" "}
               <span className="text-brand relative inline-block">
