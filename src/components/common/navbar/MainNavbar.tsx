@@ -9,11 +9,13 @@ import useCategoryStore from "@/store/useCategoryStore";
 import useWishlistStore from "@/store/useWishlistStore";
 import useUserStore from "@/store/useUserStore";
 import LoginModal from "@/components/common/LoginModal";
+import CreateOrderModal from "@/components/common/CreateOrderModal";
 
 export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
   const [catOpen, setCatOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [createOrderModalOpen, setCreateOrderModalOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -130,7 +132,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
               <input
                 type="text"
                 placeholder="Search products, services..."
-                className="flex-1 px-3 py-2 text-sm text-gray-700 outline-none bg-white"
+                className="flex-1 px-1 py-2 text-sm text-gray-700 outline-none bg-white"
               />
               <button className="bg-brand text-white px-4 py-3 transition shrink-0">
                 <svg
@@ -149,6 +151,14 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                 </svg>
               </button>
             </div>
+
+            {/* Create Order Button - Mobile */}
+            <button
+              onClick={() => setCreateOrderModalOpen(true)}
+              className="shrink-0 flex items-center gap-1.5 px-3 py-3 border-2 border-brand rounded-md text-brand text-xs font-bold transition whitespace-nowrap"
+            >
+              Order
+            </button>
 
             {/* Login / Profile Button */}
             {mounted && isLoggedIn ? (
@@ -197,9 +207,11 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                Login
+                {/* Login */}
               </button>
             )}
+            
+            
           </div>
         </div>
 
@@ -293,6 +305,7 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                       </svg>
                       <p className="text-sm font-semibold">Cart</p>
                     </Link>
+
                   </div>
                   {/* end inner flex */}
                 </div>
@@ -477,6 +490,13 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                       </svg>
                       Cart
                     </Link>
+                    {/* Create Order Fixed Navbar */}
+                    <button
+                      onClick={() => setCreateOrderModalOpen(true)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm font-bold shadow-sm"
+                    >
+                      Create Order
+                    </button>
                   </div>
                 </div>
               </div>
@@ -496,6 +516,12 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
       <LoginModal
         isOpen={loginModalOpen}
         onClose={() => setLoginModalOpen(false)}
+      />
+
+      {/* Create Order Modal */}
+      <CreateOrderModal
+        isOpen={createOrderModalOpen}
+        onClose={() => setCreateOrderModalOpen(false)}
       />
     </>
   );

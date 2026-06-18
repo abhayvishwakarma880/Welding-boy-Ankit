@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import useUserStore from "@/store/useUserStore";
+import CreateOrderModal from "@/components/common/CreateOrderModal";
 
 // Google Translate ke liye global type
 declare global {
@@ -50,6 +51,7 @@ export default function TopBar() {
   const [flash, setFlash] = useState(false);
   const [alert, setAlert] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [createOrderModalOpen, setCreateOrderModalOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -213,7 +215,10 @@ export default function TopBar() {
           )}
 
           {/* Create Order - hidden on mobile */}
-          <button className={`${btnClass} hidden sm:flex`}>
+          <button 
+            onClick={() => setCreateOrderModalOpen(true)}
+            className={`${btnClass} hidden sm:flex`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-3.5 w-3.5"
@@ -257,6 +262,12 @@ export default function TopBar() {
           </div>
         </div>
       </div>
+
+      {/* Create Order Modal */}
+      <CreateOrderModal
+        isOpen={createOrderModalOpen}
+        onClose={() => setCreateOrderModalOpen(false)}
+      />
     </div>
   );
 }
