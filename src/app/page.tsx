@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next"
 import dynamic from "next/dynamic";
 import HeroSliderWrapper from "./home/HeroSliderWrapper";
 import WhyChoose from "./home/whyChoose";
@@ -39,7 +38,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Analytics />
       <HeroSliderWrapper />
       <WhyChoose />
       <ServiceSection />
