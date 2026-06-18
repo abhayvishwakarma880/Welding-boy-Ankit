@@ -6,6 +6,7 @@ import Navbar from "../components/common/navbar";
 import Footer from "../components/common/Footer";
 import AppInitializer from "../components/common/AppInitializer";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -84,6 +85,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        <GoogleAnalytics gaId="G-J59YS7DYLK" />
       </body>
     </html>
   );
