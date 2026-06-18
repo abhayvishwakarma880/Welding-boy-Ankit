@@ -14,12 +14,12 @@ const quickLinks = [
 ];
 
 const services = [
-  "Custom Gates & Grills",
-  "Window & Door Grills",
-  "Balcony Railings",
-  "Staircase Railings",
-  "Steel Furniture",
-  "Structural Fabrication",
+  { name: "Steel Welding", path: "/services/steel-welding" },
+  { name: "Metal Fabrication", path: "/services/metal-fabrication" },
+  { name: "Gate & Grill", path: "/services/gate-grill" },
+  { name: "Industrial Work", path: "/services/industrial-work" },
+  { name: "Repair Services", path: "/services/repair-services" },
+  { name: "Custom Design", path: "/services/custom-design" },
 ];
 
 export default function Footer() {
@@ -53,8 +53,8 @@ export default function Footer() {
           {/* Social placeholder */}
           <div className="flex gap-2 mt-1">
             {[
-              { icon: <FaFacebookF className="w-3.5 h-3.5" />, href: "https://facebook.com" },
-              { icon: <FaInstagram className="w-3.5 h-3.5" />, href: "https://instagram.com" },
+              { icon: <FaFacebookF className="w-3.5 h-3.5" />, href: "https://www.facebook.com/profile.php?id=100072425872461" },
+              { icon: <FaInstagram className="w-3.5 h-3.5" />, href: "https://www.instagram.com/its_ankit_7905/" },
               { icon: <FaWhatsapp className="w-3.5 h-3.5" />, href: "https://wa.me/917905940157" },
             ].map((s, i) => (
               <Link
@@ -92,9 +92,14 @@ export default function Footer() {
           <h3 className="text-white font-bold text-sm uppercase tracking-widest">Our Services</h3>
           <ul className="flex flex-col gap-2">
             {services.map((s) => (
-              <li key={s} className="flex items-center gap-1.5 group">
-                <span className="w-1 h-1 rounded-full bg-brand/40 group-hover:bg-brand transition-colors duration-200" />
-                <span className="text-sm text-slate-500 group-hover:text-brand transition-colors duration-200">{s}</span>
+              <li key={s.path}>
+                <Link
+                  href={s.path}
+                  className="text-sm text-slate-500 hover:text-brand transition-colors duration-200 flex items-center gap-1.5 group"
+                >
+                  <span className="w-1 h-1 rounded-full bg-brand/40 group-hover:bg-brand transition-colors duration-200" />
+                  {s.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -147,7 +152,7 @@ export default function Footer() {
       <div className="border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600">
           <p>© {new Date().getFullYear()} Vishwakarma Welding Shop. All rights reserved.</p>
-          <p>Crafted with <span className="text-brand">♥</span> by Abhay Vishwakarma</p>
+          <p>Crafted with <span className="text-brand">♥</span> <a href="https://www.instagram.com/abhay.vishwakarma_/" target="_blank" className="hover:text-brand transition-colors duration-200"> by Abhay Vishwakarma</a></p>
         </div>
       </div>
 
