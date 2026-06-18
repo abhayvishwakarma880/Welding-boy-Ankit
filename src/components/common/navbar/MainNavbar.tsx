@@ -491,12 +491,12 @@ export default function MainNavbar({ isFixed = false }: { isFixed?: boolean }) {
                       Cart
                     </Link>
                     {/* Create Order Fixed Navbar */}
-                    <button
+                    {/* <button
                       onClick={() => setCreateOrderModalOpen(true)}
                       className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm font-bold shadow-sm"
                     >
                       Create Order
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
