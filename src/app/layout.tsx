@@ -7,6 +7,7 @@ import Footer from "../components/common/Footer";
 import AppInitializer from "../components/common/AppInitializer";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -86,6 +87,7 @@ export default function RootLayout({
         <Footer />
         <Analytics />
         <GoogleAnalytics gaId="G-J59YS7DYLK" />
+        <SpeedInsights />
         
       </body>
     </html>
