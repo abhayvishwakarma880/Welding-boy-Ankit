@@ -120,13 +120,13 @@ export default function Footer() {
               </div>
             </Link>
 
-            <Link href="mailto:info@vishwakarmavelding.com" className="flex items-start gap-3 group">
+            <Link href="mailto:ankitvishwakarma7905940@gmail.com" className="flex items-start gap-3 group">
               <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 group-hover:bg-brand group-hover:border-brand transition-all duration-300">
                 <Mail className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors duration-300" />
               </div>
               <div>
                 <p className="text-[11px] text-slate-600 uppercase tracking-wider font-semibold">Email</p>
-                <p className="text-sm text-slate-400 group-hover:text-brand transition-colors duration-200">info@vishwakarma.com</p>
+                <p className="text-sm text-slate-400 group-hover:text-brand transition-colors duration-200">ankitvishwakarma7905940@gmail.com</p>
               </div>
             </Link>
 
