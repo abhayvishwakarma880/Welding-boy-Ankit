@@ -1,13 +1,17 @@
 export type Article = {
   slug: string;
   title: string;
-  description: string;
+  description: string;       // listing page pe dikhta hai (plain text ya short HTML)
+  seoDescription?: string;   // meta description — always plain text, 150-160 chars
   category: string;
-  date: string;
+  date: string;              // display format: "15 Jan 2025"
+  isoDate: string;           // JSON-LD ke liye: "2025-01-15"
   readTime: string;
   image: string;
+  tags?: string[];
   popular?: boolean;
   featured?: boolean;
+  fullContent?: string;      // detail page ka full HTML content
 };
 
 export const categories = [
@@ -24,171 +28,17 @@ export const categories = [
 
 export const articles: Article[] = [
   {
-    slug: "complete-guide-main-gate-selection",
-    title: "Complete Guide to Choosing the Right Main Gate for Your Home",
-    description: "Ghar ke liye sahi gate choose karte samay design, durability, material aur maintenance jaise factors ko samajhna bahut zaroori hai.",
-    category: "Main Gates",
+    slug: "top-benefits-of-tin-shed-fabrication-for-homes-warehouses-commercial-spaces",
+    title: "Top Benefits of Tin Shed Fabrication for Homes, Warehouses & Commercial Spaces",
+    seoDescription: "Tin shed fabrication ke top benefits janiye — homes, warehouses aur commercial spaces ke liye durable, cost-effective roofing solution. Shree Vishwakarma Welding Shop, Khadda, Kushinagar.",
+    description: "<p>Tin sheds have become one of the most popular and cost-effective roofing solutions for residential, commercial, and industrial applications. Whether you need a warehouse shed, workshop shed, parking shed, factory roofing, or agricultural shelter, a professionally fabricated tin shed offers durability, weather protection, and long-term value.</p><p>At Shree Vishwakarma Welding Shop, we specialize in designing and fabricating high-quality tin sheds that are built to withstand harsh weather conditions while maintaining structural strength and reliability.</p><h2>Why Choose a Tin Shed?</h2><p>Tin sheds are widely preferred because they provide excellent protection against sunlight, rain, and other environmental factors. Modern fabrication techniques ensure that the structure remains strong, stable, and aesthetically appealing for years.</p><h3>Key Advantages of Tin Shed Fabrication</h3><h2>Applications of Tin Sheds</h2><p>Tin sheds can be used in a variety of locations and industries due to their flexibility and strength.</p><h2>Quality Fabrication Matters</h2><p>A well-designed tin shed depends on the quality of materials, welding precision, and structural engineering. Using high-grade steel sections and quality roofing sheets ensures maximum durability and safety.</p><p>Our fabrication process focuses on:</p><h2>Why Choose Shree Vishwakarma Welding Shop?</h2><p>Shree Vishwakarma Welding Shop has extensive experience in metal fabrication and custom welding projects. We provide reliable, durable, and affordable tin shed solutions tailored to customer requirements.</p><p>Our commitment to quality workmanship, premium materials, and customer satisfaction has made us a trusted choice for fabrication and welding services.</p><h2>Conclusion</h2><p>A professionally fabricated tin shed is an excellent investment for anyone looking for a durable, economical, and versatile roofing solution. Whether you require a warehouse shed, commercial roofing structure, parking shed, or industrial shelter, choosing experienced fabrication professionals ensures long-lasting performance and value.</p><p>Contact Shree Vishwakarma Welding Shop today to discuss your custom tin shed fabrication requirements and get a solution designed specifically for your needs.</p>",
+    category: "Industrial Work",
     date: "15 Jan 2025",
+    isoDate: "2025-01-15",
     readTime: "5 Min",
-    image: "/images/blog/main-gate-guide.jpg",
+    image: "/images/gallery/tin-Shade.webp",
+    tags: ["tin shed", "shed fabrication", "industrial shed", "warehouse shed", "parking shed", "welding khadda", "fabrication kushinagar"],
     featured: true,
-  },
-  {
-    slug: "top-main-gate-designs-modern-homes",
-    title: "Top Main Gate Designs for Modern Homes",
-    description: "Modern homes ke liye popular gate designs aur unke advantages jo aapke ghar ki look badal dete hain.",
-    category: "Main Gates",
-    date: "12 Jan 2025",
-    readTime: "4 Min",
-    image: "/images/blog/modern-gate-designs.jpg",
-    popular: true,
-  },
-  {
-    slug: "iron-vs-steel-gates-comparison",
-    title: "Iron vs Steel Gates: Which One Is Better?",
-    description: "Iron aur steel gate ke beech comparison aur selection guide — kaun sa material aapke liye sahi rahega.",
-    category: "Main Gates",
-    date: "10 Jan 2025",
-    readTime: "6 Min",
-    image: "/images/blog/iron-vs-steel.jpg",
-    popular: true,
-  },
-  {
-    slug: "benefits-custom-fabrication-work",
-    title: "Benefits of Custom Fabrication Work",
-    description: "Custom fabrication ka use karke aap apni exact requirement ke according durable aur unique metal structures banwa sakte hain.",
-    category: "Fabrication",
-    date: "08 Jan 2025",
-    readTime: "4 Min",
-    image: "/images/blog/custom-fabrication.jpg",
-    popular: true,
-  },
-  {
-    slug: "how-to-maintain-metal-gates",
-    title: "How to Maintain Metal Gates for Long Life",
-    description: "Gate maintenance tips aur rust prevention methods jo aapke gate ki life 2x badha dete hain.",
-    category: "Maintenance",
-    date: "05 Jan 2025",
-    readTime: "3 Min",
-    image: "/images/blog/gate-maintenance.jpg",
-  },
-  {
-    slug: "balcony-railing-design-guide",
-    title: "Choosing the Right Balcony Railing Design",
-    description: "Safety aur appearance dono ko dhyan me rakhkar railing selection kaise karein — complete guide.",
-    category: "Railings",
-    date: "02 Jan 2025",
-    readTime: "5 Min",
-    image: "/images/blog/balcony-railing.jpg",
-    popular: true,
-  },
-  {
-    slug: "shed-installation-guide",
-    title: "Things to Know Before Installing a Shed",
-    description: "Shed installation se pehle dhyan dene wali important baatein jo aapka time aur paisa dono bachayegi.",
-    category: "Sheds",
-    date: "28 Dec 2024",
-    readTime: "4 Min",
-    image: "/images/blog/shed-installation.jpg",
-  },
-  {
-    slug: "best-main-gate-designs-indian-homes",
-    title: "Best Main Gate Designs for Indian Homes",
-    description: "Indian architecture ke saath match karne wale gate designs jo traditional aur modern dono styles mein available hain.",
-    category: "Main Gates",
-    date: "25 Dec 2024",
-    readTime: "5 Min",
-    image: "/images/blog/indian-gate-designs.jpg",
-  },
-  {
-    slug: "welding-structural-strength",
-    title: "How Welding Improves Structural Strength",
-    description: "Professional welding se structure ki strength aur durability kaise improve hoti hai — technical insights.",
-    category: "Welding Tips",
-    date: "22 Dec 2024",
-    readTime: "6 Min",
-    image: "/images/blog/welding-strength.jpg",
-  },
-  {
-    slug: "choosing-security-grills",
-    title: "Choosing Security Grills for Your Home",
-    description: "Security grills ki selection mein design, thickness, aur locking mechanism — kya dekhna chahiye.",
-    category: "Grills",
-    date: "18 Dec 2024",
-    readTime: "4 Min",
-    image: "/images/blog/security-grills.jpg",
-  },
-  {
-    slug: "staircase-railing-ideas",
-    title: "Modern Staircase Railing Ideas",
-    description: "Ghar ki seedhi ke liye modern aur durable railing designs jo look aur safety dono enhance karein.",
-    category: "Railings",
-    date: "15 Dec 2024",
-    readTime: "3 Min",
-    image: "/images/blog/staircase-railing.jpg",
-  },
-  {
-    slug: "common-welding-mistakes",
-    title: "Common Welding Mistakes to Avoid",
-    description: "Welding karte samay jo galtiyan sabse zyada hoti hain aur unhe kaise avoid karein.",
-    category: "Welding Tips",
-    date: "12 Dec 2024",
-    readTime: "5 Min",
-    image: "/images/blog/welding-mistakes.jpg",
-  },
-  {
-    slug: "fabrication-cost-factors",
-    title: "Fabrication Cost Factors You Should Know",
-    description: "Metal fabrication ka cost kaise decide hota hai — material, design complexity aur labor charges ka breakdown.",
-    category: "Fabrication",
-    date: "08 Dec 2024",
-    readTime: "4 Min",
-    image: "/images/blog/fabrication-cost.jpg",
-  },
-  {
-    slug: "industrial-fabrication-basics",
-    title: "Industrial Fabrication Basics",
-    description: "Industrial metal fabrication kya hoti hai, kahan use hoti hai aur quality standards kya hone chahiye.",
-    category: "Industrial Work",
-    date: "05 Dec 2024",
-    readTime: "6 Min",
-    image: "/images/blog/industrial-fabrication.jpg",
-  },
-  {
-    slug: "parking-shed-cost-guide",
-    title: "Parking Shed Cost Guide: What to Expect",
-    description: "Parking shed banwane mein kitna kharcha aata hai — material, size aur design ke hisab se complete breakdown.",
-    category: "Sheds",
-    date: "01 Dec 2024",
-    readTime: "4 Min",
-    image: "/images/blog/parking-shed-cost.jpg",
-  },
-  {
-    slug: "decorative-grill-designs",
-    title: "Decorative Grill Designs That Enhance Your Home",
-    description: "Security ke saath saath ghar ki sundarata badhane wale decorative grill designs aur unki khasiyat.",
-    category: "Grills",
-    date: "28 Nov 2024",
-    readTime: "3 Min",
-    image: "/images/blog/decorative-grills.jpg",
-  },
-  {
-    slug: "gate-rust-prevention-tips",
-    title: "Gate Rust Prevention Tips for Long Life",
-    description: "Barsaat aur nami se gate ko rust se bachane ke liye practical aur low-cost tips.",
-    category: "Maintenance",
-    date: "25 Nov 2024",
-    readTime: "3 Min",
-    image: "/images/blog/rust-prevention.jpg",
-  },
-  {
-    slug: "industrial-shed-construction-guide",
-    title: "Industrial Shed Construction: A Complete Guide",
-    description: "Factory ya godown ke liye industrial shed banwane se pehle in important points ko zaroor janein.",
-    category: "Industrial Work",
-    date: "20 Nov 2024",
-    readTime: "7 Min",
-    image: "/images/blog/industrial-shed.jpg",
     popular: true,
   },
 ];
