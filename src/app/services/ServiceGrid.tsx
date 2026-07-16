@@ -1,9 +1,11 @@
+import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 
 const services = [
   {
     number: "01",
     title: "Steel Welding",
+    image: "/images/sliders/hero-welding-services-khadda.webp",
     description:
       "Strong aur durable steel welding solutions jo residential, commercial aur industrial projects ke liye suitable hain. Har joint ko proper strength aur finishing ke saath weld kiya jata hai taaki structure long-term reliable rahe.",
     includes: [
@@ -24,6 +26,7 @@ const services = [
   {
     number: "02",
     title: "Metal Fabrication",
+    image: "/images/sliders/hero-welding-services-khadda.webp",
     description:
       "Customer requirements ke according custom metal structures aur products design aur fabricate kiye jaate hain. Accurate measurements aur quality finishing par special focus diya jata hai.",
     includes: [
@@ -46,6 +49,7 @@ const services = [
   {
     number: "03",
     title: "Gate & Grill Manufacturing",
+    image: "/images/sliders/hero-steel-gate-fabrication.webp",
     description:
       "Homes, shops aur commercial properties ke liye attractive aur durable gates aur grills tayar kiye jaate hain. Design, size aur finishing customer requirements ke hisaab se customize ki ja sakti hai.",
     includes: [
@@ -70,6 +74,7 @@ const services = [
   {
     number: "04",
     title: "Industrial Work",
+    image: "/images/sliders/hero-welding-services-khadda.webp",
     description:
       "Industrial projects ke liye fabrication, installation aur welding services provide ki jaati hain. Large-scale structures aur machinery support components par bhi kaam kiya jata hai.",
     includes: [
@@ -91,6 +96,7 @@ const services = [
   {
     number: "05",
     title: "Repair Services",
+    image: "/images/sliders/hero-welding-services-khadda.webp",
     description:
       "Purane ya damaged metal products ko repair aur restore kiya jata hai taaki unki functionality aur strength wapas aa sake.",
     includes: [
@@ -111,6 +117,7 @@ const services = [
   {
     number: "06",
     title: "Custom Design Solutions",
+    image: "/images/sliders/hero-grill-railing-welding.webp",
     description:
       "Customer ki requirement aur available space ke according completely customized fabrication solutions provide kiye jaate hain.",
     includes: [
@@ -152,16 +159,29 @@ export default function ServiceGrid() {
           {services.map((s) => (
             <div
               key={s.number}
-              className="bg-white border border-slate-200/70 rounded-xl p-6 flex flex-col gap-4 hover:border-brand/30 hover:shadow-xl hover:shadow-brand/5 hover:-translate-y-1 transition-all duration-300 group"
+              className="bg-white border border-slate-200/70 rounded-xl overflow-hidden flex flex-col gap-0 hover:border-brand/30 hover:shadow-xl hover:shadow-brand/5 hover:-translate-y-1 transition-all duration-300 group"
             >
+              {/* Image */}
+              <div className="relative w-full h-44 overflow-hidden">
+                <Image
+                  src={s.image}
+                  alt={s.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <span className="absolute bottom-3 left-4 text-white text-base font-bold drop-shadow">{s.title}</span>
+                {/* <span className="absolute top-3 right-3 text-3xl font-extrabold text-white/20 leading-none">{s.number}</span> */}
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col gap-4">
               {/* Top row */}
               <div className="flex items-start justify-between">
                 <div className="w-11 h-11 rounded-xl bg-brand/5 border border-brand/10 flex items-center justify-center shrink-0">
                   {s.icon}
                 </div>
-                <span className="text-4xl font-extrabold text-slate-100 group-hover:text-brand/10 transition-colors duration-300 leading-none">
-                  {s.number}
-                </span>
               </div>
 
               {/* Title */}
@@ -186,6 +206,7 @@ export default function ServiceGrid() {
                     <span className="text-xs text-slate-600">{item}</span>
                   </div>
                 ))}
+              </div>
               </div>
             </div>
           ))}

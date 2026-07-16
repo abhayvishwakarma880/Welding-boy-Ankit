@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getBlogs } from "@/apis/blogs";
 import { Clock } from "lucide-react";
-import { Blog } from "./page";
+import { Blog } from "./BlogsClient";
 
 export default function PopularArticles() {
   const [blogs, setBlogs] = useState<Blog[]>([]);

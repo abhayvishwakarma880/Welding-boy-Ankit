@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Blog } from "./page";
+import { Blog } from "./BlogsClient";
 import { CalendarDays, Clock } from "lucide-react";
 
 const fmtDate = (iso: string) =>

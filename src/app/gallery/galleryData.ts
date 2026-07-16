@@ -1,157 +1,28 @@
-export const galleryCategories = [
-  "All",
-  "Main Gates",
-  "Grills",
-  "Railings",
-  "Sheds",
-  "Industrial Work",
-  "Custom Fabrication",
-  "Recent Projects",
-];
+export interface GalleryItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
 
-export const galleryItems = [
+export const GALLERY_CATEGORIES = [
+  "All",
+  "Steel Gate",
+  "Window Grill",
+  "Staircase Railing",
+  "Metal Fabrication",
+  "Industrial Work",
+  "Repair Work",
+] as const;
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  // ── Steel Gate ──────────────────────────────────────────────
   {
-    id: 1,
-    title: "Modern Steel Main Gate",
-    category: "Main Gates",
-    description: "Custom designed steel entrance gate with strong structure and premium finishing.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 2,
-    title: "Residential Safety Grill",
-    category: "Grills",
-    description: "Durable window grill designed for security and long-term performance.",
-    image: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 3,
-    title: "Decorative Iron Gate",
-    category: "Main Gates",
-    description: "Elegant iron gate combining security with attractive design elements.",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 4,
-    title: "Balcony Safety Railing",
-    category: "Railings",
-    description: "Modern railing fabrication for residential balcony safety and appearance.",
-    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 5,
-    title: "Staircase Railing Work",
-    category: "Railings",
-    description: "Custom staircase railing manufactured with precise welding and finishing.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 6,
-    title: "Parking Shed Structure",
-    category: "Sheds",
-    description: "Weather-resistant shed solution for vehicle protection and daily use.",
-    image: "https://images.unsplash.com/photo-1558980394-4c7c9299fe96?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 7,
-    title: "Shop Front Security Grill",
-    category: "Grills",
-    description: "Strong commercial security grill fabricated for shops and business spaces.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 8,
-    title: "Sliding Steel Gate",
-    category: "Main Gates",
-    description: "Space-saving sliding gate suitable for residential and commercial properties.",
-    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 9,
-    title: "Terrace Safety Railing",
-    category: "Railings",
-    description: "Heavy-duty terrace railing designed for safety and durability.",
-    image: "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 10,
-    title: "Industrial Fabrication Frame",
+    id: "g1",
+    title: "Tin shed",
+    description: "Tin shed industrial work",
+    image: "/images/gallery/tin-Shade.webp",
     category: "Industrial Work",
-    description: "Custom fabricated support frame manufactured for industrial applications.",
-    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 11,
-    title: "Warehouse Shed Project",
-    category: "Sheds",
-    description: "Large-scale shed fabrication completed for storage and warehouse usage.",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 12,
-    title: "Entrance Canopy Structure",
-    category: "Sheds",
-    description: "Protective entrance canopy fabricated with strong steel framework.",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 13,
-    title: "Decorative Window Grill",
-    category: "Grills",
-    description: "Security grill featuring decorative patterns and clean finishing.",
-    image: "https://images.unsplash.com/photo-1558618047-f4e60cde054f?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 14,
-    title: "Custom Metal Door",
-    category: "Custom Fabrication",
-    description: "Fabricated metal door built according to client requirements and dimensions.",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 15,
-    title: "Heavy Duty Support Structure",
-    category: "Industrial Work",
-    description: "Industrial support fabrication designed for strength and load-bearing performance.",
-    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80",
-    recent: false,
-  },
-  {
-    id: 16,
-    title: "Commercial Gate Installation",
-    category: "Recent Projects",
-    description: "Large entrance gate manufactured and installed for commercial property access.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 17,
-    title: "Boundary Gate Project",
-    category: "Recent Projects",
-    description: "Custom boundary gate fabricated with durable materials and professional welding.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    recent: true,
-  },
-  {
-    id: 18,
-    title: "Custom Fabrication Project",
-    category: "Custom Fabrication",
-    description: "Specialized fabrication work completed according to unique customer requirements.",
-    image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800&q=80",
-    recent: true,
   },
 ];
