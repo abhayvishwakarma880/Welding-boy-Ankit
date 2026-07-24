@@ -14,8 +14,20 @@ const videos = [
     description: "Custom sliding tin shade fabrication for rooftop staircases (Ghat). Strong MS frame, smooth sliding system, and durable roofing designed for protection against rain and sunlight.",
     shareUrl: `${BASE_URL}/videos`,
   },
-  // Naye videos yahan add karo:
-  // { src: "/video/video2.mp4", category: "Gate Manufacturing", title: "...", description: "...", shareUrl: `${BASE_URL}/videos` },
+  {
+    src: "/video/iron-grill.mp4",
+    category: "Iron Grill",
+    title: "Custom Iron Grill Fabrication — Khadda, Kushinagar",
+    description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
+  {
+    src: "/video/house-railing.mp4",
+    category: "House Railing",
+    title: "Modern House Railing Fabrication — Khadda, Kushinagar",
+    description: "Custom MS and steel railing fabrication for homes with strong welding, premium finishing, and modern designs for balconies, staircases, and terraces.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
 ];
 
 function VideoCard({
