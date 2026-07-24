@@ -9,6 +9,7 @@ export interface GalleryItem {
 export const GALLERY_CATEGORIES = [
   "All",
   "Steel Gate",
+  "Iron Gate",
   "Window Grill",
   "Staircase Railing",
   "Metal Fabrication",
@@ -31,5 +32,12 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     description: "slider at stares work",
     image: "/images/gallery/sidi-pr-slider.webp",
     category: "Industrial Work",
+  },
+  {
+    id: "g3",
+    title: "Gate",
+    description: "Home gate",
+    image: "/images/gallery/gate.webp",
+    category: "Iron Gate",
   },
 ];
