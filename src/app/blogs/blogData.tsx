@@ -41,6 +41,85 @@ export const articles: Article[] = [
     featured: true,
     popular: true,
   },
+  {
+  slug: "sliding-tin-shade-for-rooftop-staircase-ghat",
+  title: "Sliding Tin Shade for Rooftop Staircase (Ghat): Smart Protection for Every Home",
+  seoDescription: "Apne ghar ki chhat ke ghat (staircase) ke liye sliding tin shade lagwaye. Barish, dhoop aur dhool se bachav ke liye durable aur custom fabrication solution. Shree Vishwakarma Welding Shop, Khadda, Kushinagar.",
+
+  description: `
+  <p>Nowadays, many homeowners in villages and cities are installing <strong>Sliding Tin Shades</strong> over the rooftop staircase (commonly known as <strong>Ghat</strong>). A sliding shade protects the staircase entrance from rain, sunlight, dust, and falling leaves while allowing you to open or close the roof whenever required.</p>
+
+  <p>At <strong>Shree Vishwakarma Welding Shop, Khadda, Kushinagar</strong>, we manufacture strong and custom-designed sliding tin shades using high-quality steel frames and durable roofing sheets. Every shade is fabricated according to the available space and customer requirements.</p>
+
+  <h2>Why Install a Sliding Tin Shade on Your Rooftop Staircase?</h2>
+
+  <p>A rooftop staircase remains exposed throughout the year. During heavy rain, water enters the staircase and makes it slippery. In summer, excessive sunlight heats the staircase area, and dust continuously accumulates. A sliding tin shade solves all these problems while giving your home a modern appearance.</p>
+
+  <h2>Benefits of Sliding Tin Shade</h2>
+
+  <ul>
+    <li>Protects the staircase from rain and direct sunlight.</li>
+    <li>Sliding system allows easy opening and closing whenever needed.</li>
+    <li>Strong MS steel frame with high-quality welding.</li>
+    <li>Weather-resistant and long-lasting construction.</li>
+    <li>Requires very little maintenance.</li>
+    <li>Custom size and design according to your rooftop.</li>
+    <li>Improves the overall appearance of the house.</li>
+    <li>Affordable and cost-effective solution.</li>
+  </ul>
+
+  <h2>Our Fabrication Process</h2>
+
+  <p>Our experienced fabrication team carefully measures the installation area before manufacturing the structure. We use premium-quality MS pipes, durable roofing sheets, precision welding, and smooth sliding mechanisms to ensure long-lasting performance.</p>
+
+  <p>Each sliding shade is tested for proper movement, strength, and stability before installation.</p>
+
+  <h2>Suitable For</h2>
+
+  <ul>
+    <li>Village Homes</li>
+    <li>Residential Buildings</li>
+    <li>Duplex Houses</li>
+    <li>Independent Homes</li>
+    <li>Terrace Staircase (Ghat)</li>
+    <li>Roof Access Areas</li>
+  </ul>
+
+  <h2>Why Choose Shree Vishwakarma Welding Shop?</h2>
+
+  <p>With years of experience in welding and fabrication, we provide durable, attractive, and custom-built sliding tin shades that perfectly match your home. Our focus is on quality materials, strong fabrication, timely delivery, and customer satisfaction.</p>
+
+  <p>We proudly serve customers across <strong>Khadda, Kushinagar</strong> and nearby areas with reliable fabrication services at reasonable prices.</p>
+
+  <h2>Conclusion</h2>
+
+  <p>If you are planning to protect your rooftop staircase from rain and sunlight, a <strong>Sliding Tin Shade</strong> is one of the best investments for your home. It offers convenience, durability, and an attractive look while increasing the lifespan of your staircase area.</p>
+
+  <p>Contact <strong>Shree Vishwakarma Welding Shop</strong> today for custom sliding tin shade fabrication and professional installation in Khadda, Kushinagar.</p>
+  `,
+
+  category: "Residential Fabrication",
+  date: "24 Jul 2026",
+  isoDate: "2026-07-24",
+  readTime: "4 Min",
+  image: "/images/gallery/sidi-pr-slider.webp",
+
+  tags: [
+    "sliding tin shade",
+    "rooftop staircase shade",
+    "ghat shade",
+    "roof sliding shade",
+    "tin shed fabrication",
+    "home fabrication",
+    "welding khadda",
+    "fabrication kushinagar",
+    "terrace shade",
+    "roof shade"
+  ],
+
+  featured: true,
+  popular: true,
+}
 ];
 
 export const featuredArticle = articles.find((a) => a.featured)!;

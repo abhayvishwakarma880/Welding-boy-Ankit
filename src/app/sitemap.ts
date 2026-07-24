@@ -1,91 +1,65 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { SERVICES } from "@/app/services/servicesData";
+import { GALLERY_ITEMS } from "@/app/gallery/galleryData";
+import { articles } from "@/app/blogs/blogData";
 
 const BASE_URL = "https://vishwakarmawelding.in";
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL!;
 
-// ── Fetch all published blog slugs for sitemap ───────────────────
-async function getAllBlogSlugs(): Promise<
-  { slug: string; updatedAt?: string; createdAt?: string }[]
-> {
-  try {
-    const res = await fetch(`${API_BASE}/blog/published?page=1&limit=500`, {
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return [];
-    const json = await res.json();
-    const blogs: { slug?: string; _id: string; updatedAt?: string; createdAt?: string }[] =
-      json?.data ?? [];
-    return blogs
-      .filter((b) => b.slug)
-      .map((b) => ({
-        slug: b.slug as string,
-        updatedAt: b.updatedAt,
-        createdAt: b.createdAt,
-      }));
-  } catch {
-    return [];
-  }
-}
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date().toISOString();
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // ── Static Pages ─────────────────────────────────────────────
+  // ── Static pages ─────────────────────────────────────────────
   const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: BASE_URL,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${BASE_URL}/services`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/products`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/gallery`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/reviews`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${BASE_URL}/blogs`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
+    { url: BASE_URL,              lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
+    { url: `${BASE_URL}/about`,   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/services`,lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${BASE_URL}/gallery`, lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${BASE_URL}/videos`,  lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${BASE_URL}/blogs`,   lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
+    { url: `${BASE_URL}/products`,lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
+    { url: `${BASE_URL}/reviews`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
 
-  // ── Dynamic Blog Pages ────────────────────────────────────────
-  const blogs = await getAllBlogSlugs();
-  const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
-    url: `${BASE_URL}/blog/${blog.slug}`,
-    lastModified: blog.updatedAt
-      ? new Date(blog.updatedAt)
-      : blog.createdAt
-      ? new Date(blog.createdAt)
-      : new Date(),
+  // ── Service pages ─────────────────────────────────────────────
+  const servicePages: MetadataRoute.Sitemap = SERVICES.map((s) => ({
+    url: `${BASE_URL}/services/${s.slug}`,
+    lastModified: now,
     changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  // ── Gallery items (image URLs for Google Images indexing) ─────
+  const galleryPages: MetadataRoute.Sitemap = GALLERY_ITEMS.map((g) => ({
+    url: `${BASE_URL}/gallery`,
+    lastModified: now,
+    changeFrequency: "weekly",
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPages];
+  // ── Blog / Article pages ──────────────────────────────────────
+  const blogPages: MetadataRoute.Sitemap = articles.map((a) => ({
+    url: `${BASE_URL}/blog/${a.slug}`,
+    lastModified: a.isoDate,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  // ── Video page ────────────────────────────────────────────────
+  const videoPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/videos`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+  ];
+
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...galleryPages,
+    ...blogPages,
+    ...videoPages,
+  ];
 }

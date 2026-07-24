@@ -25,4 +25,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     image: "/images/gallery/tin-Shade.webp",
     category: "Industrial Work",
   },
+  {
+    id: "g2",
+    title: "Slider",
+    description: "slider at stares work",
+    image: "/images/gallery/sidi-pr-slider.webp",
+    category: "Industrial Work",
+  },
 ];
