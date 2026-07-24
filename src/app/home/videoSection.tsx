@@ -15,17 +15,19 @@ const videos = [
     shareUrl: `${BASE_URL}/videos`,
   },
   {
-  src: "/video/house-railing.mp4",
-  category: "House Railing",
-  title: "Modern House Railing Fabrication — Khadda, Kushinagar",
-  description: "Custom MS and steel railing fabrication for homes with strong welding, premium finishing, and modern designs for balconies, staircases, and terraces.",
-},
-{
-  src: "/video/iron-grill.mp4",
-  category: "Iron Grill",
-  title: "Custom Iron Grill Fabrication — Khadda, Kushinagar",
-  description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
-},
+    src: "/video/house-railing.mp4",
+    category: "House Railing",
+    title: "Modern House Railing Fabrication — Khadda, Kushinagar",
+    description: "Custom MS and steel railing fabrication for homes with strong welding, premium finishing, and modern designs for balconies, staircases, and terraces.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
+  {
+    src: "/video/iron-grill.mp4",
+    category: "Iron Grill",
+    title: "Custom Iron Grill Fabrication — Khadda, Kushinagar",
+    description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
 ];
 
 function VideoCard({
