@@ -37,11 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
-      images: GALLERY_ITEMS.map((g) => ({
-        url: `${BASE_URL}${g.image}`,
-        title: g.title,
-        caption: g.description,
-      })),
+      images: GALLERY_ITEMS.map((g) => `${BASE_URL}${g.image}`),
     },
   ];
 
@@ -63,8 +59,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       videos: VIDEOS.map((v) => ({
         title: v.title,
         description: v.description,
-        contentUrl: `${BASE_URL}${v.src}`,
-        thumbnailUrl: `${BASE_URL}/images/gallery/tin-Shade.webp`,
+        content_loc: `${BASE_URL}${v.src}`,
+        thumbnail_loc: `${BASE_URL}/images/gallery/tin-Shade.webp`,
       })),
     },
   ];
