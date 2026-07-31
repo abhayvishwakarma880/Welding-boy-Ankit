@@ -28,6 +28,27 @@ const videos = [
     description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
     shareUrl: `${BASE_URL}/videos`,
   },
+  {
+    src: "/video/welding-video.mp4",
+    category: "Metal Fabrication",
+    title: "Welding Fabrication — Khadda, Kushinagar",
+    description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
+  {
+    src: "/video/intro.mp4",
+    category: "Metal Fabrication",
+    title: "Welding Fabrication — Khadda, Kushinagar",
+    description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
+  {
+    src: "/video/gate-welding.mp4",
+    category: "Metal Fabrication",
+    title: "Welding Fabrication — Khadda, Kushinagar",
+    description: "High-quality Iron window and safety grill fabrication with durable materials, precision welding, and customized designs for residential and commercial properties.",
+    shareUrl: `${BASE_URL}/videos`,
+  },
 ];
 
 function VideoCard({
@@ -104,7 +125,7 @@ export default function VideoSection() {
       <div className="max-w-7xl mx-auto flex flex-col gap-10">
 
         <div className="text-center">
-          <div className="w-12 h-[3px] bg-brand rounded-full mx-auto mb-4" />
+          <div className="w-12 h-0.75 bg-brand rounded-full mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             Our Work in <span className="text-brand">Action</span>
           </h2>

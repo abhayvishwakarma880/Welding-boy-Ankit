@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SERVICES } from "@/app/services/servicesData";
 import { GALLERY_ITEMS } from "@/app/gallery/galleryData";
 import { articles } from "@/app/blogs/blogData";
+import { VIDEOS } from "@/app/videos/videosData";
 
 const BASE_URL = "https://vishwakarmawelding.in";
 
@@ -29,13 +30,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // ── Gallery items (image URLs for Google Images indexing) ─────
-  const galleryPages: MetadataRoute.Sitemap = GALLERY_ITEMS.map((g) => ({
-    url: `${BASE_URL}/gallery`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  // ── Gallery page with all images (Google Images indexing) ──────
+  const galleryPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/gallery`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      images: GALLERY_ITEMS.map((g) => ({
+        url: `${BASE_URL}${g.image}`,
+        title: g.title,
+        caption: g.description,
+      })),
+    },
+  ];
 
   // ── Blog / Article pages ──────────────────────────────────────
   const blogPages: MetadataRoute.Sitemap = articles.map((a) => ({
@@ -45,13 +53,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // ── Video page ────────────────────────────────────────────────
+  // ── Video page with all videos (Google Video indexing) ─────────
   const videoPages: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/videos`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
+      videos: VIDEOS.map((v) => ({
+        title: v.title,
+        description: v.description,
+        contentUrl: `${BASE_URL}${v.src}`,
+        thumbnailUrl: `${BASE_URL}/images/gallery/tin-Shade.webp`,
+      })),
     },
   ];
 
